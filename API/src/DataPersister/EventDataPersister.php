@@ -28,6 +28,7 @@ final class EventDataPersister implements ContextAwareDataPersisterInterface {
     }
 
     public function remove($data, array $context = []) {
-
+        $this->em->remove($data);
+        $this->em->flush();
     }
 }
