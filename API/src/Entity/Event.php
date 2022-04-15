@@ -63,16 +63,17 @@ class Event
     #[ORM\Column(type: 'datetime')]
     private $date_event;
 
-    #[Groups(['Event:read'])]
+    #[Groups(['Event:Read'])]
     public ?string $contentUrl = null;
 
     /**
      * @Vich\UploadableField(mapping="event", fileNameProperty="filePath")
      */
-    #[Groups(['book:write'])]
+    #[Groups(['Event:write'])]
     public ?File $file = null;
 
-    #[ORM\Column(nullable: true)] 
+    #[ORM\Column(nullable: true)]
+    #[Groups(['Event:Read'])] 
     public ?string $filePath = null;
 
     public function getNumEvent(): ?string
