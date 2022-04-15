@@ -15,6 +15,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
     ],
     denormalizationContext: [
         'groups' => ['Event:Write']
+    ],
+    itemOperations: [
+        'get',
+        'put',
+        'delete'
     ]
 )]
 class Event
