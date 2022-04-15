@@ -2,30 +2,46 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\EventRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 #[ORM\Table(name: "Events")]
+#[ApiResource(
+    normalizationContext: [
+        'groups' => ['Event:Read']
+    ],
+    denormalizationContext: [
+        'groups' => ['Event:Write']
+    ]
+)]
 class Event
 {
     #[ORM\Id]
     #[ORM\Column(type: 'string', length: 15)]
+    #[Groups(['Event:Read', 'Event:Write'])]
     private $num_Event;
 
+    #[Groups(['Event:Read', 'Event:Write'])]
     #[ORM\Column(type: 'string', length: 35)]
     private $title;
 
+    #[Groups(['Event:Read', 'Event:Write'])]
     #[ORM\Column(type: 'string', length: 25)]
     private $category;
 
-    #[ORM\Column(type: 'string', length: 15)]
     # defined value ("Enfant", "Jeune", "Adulte")
+    #[Groups(['Event:Read', 'Event:Write'])]
+    #[ORM\Column(type: 'string', length: 15)]
     private $categoryAge;
 
+    #[Groups(['Event:Read', 'Event:Write'])]
     #[ORM\Column(type: 'integer')]
     private $cost;
 
+    #[Groups(['Event:Read', 'Event:Write'])]
     #[ORM\Column(type: 'datetime')]
     private $date_event;
 
