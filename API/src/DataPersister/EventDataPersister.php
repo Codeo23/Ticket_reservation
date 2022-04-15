@@ -4,7 +4,6 @@ namespace App\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use App\Entity\Event;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class EventDataPersister implements ContextAwareDataPersisterInterface {
