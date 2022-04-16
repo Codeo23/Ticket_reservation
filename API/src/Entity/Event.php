@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\EventRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -63,17 +64,17 @@ class Event
     #[ORM\Column(type: 'datetime')]
     private $date_event;
 
-    #[Groups(['Event:Read'])]
+    #[Groups(['Event:Read', 'Event:Write'])]
     public ?string $contentUrl = null;
 
     /**
-     * @Vich\UploadableField(mapping="event", fileNameProperty="filePath")
-     */
-    #[Groups(['Event:write'])]
+    * @Vich\UploadableField(mapping="event", fileNameProperty="filePath")
+    */
+    #[Groups(['Event:Write'])]
     public ?File $file = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['Event:Read'])] 
+    #[Groups(['Event:Read', 'Event:Write'])] 
     public ?string $filePath = null;
 
     public function getNumEvent(): ?string
@@ -147,4 +148,5 @@ class Event
 
         return $this;
     }
+
 }
