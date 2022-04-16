@@ -22,3 +22,12 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    decoder:
+        class: App\Encoder\MultipartEncoder
+        public: false
+        tags: [serializer.encoder]
+
+    uploadFile:
+        class: App\Serializer\UploadedFileDenormalizer
+        public: false
+        tags: [serializer.normalizer]
