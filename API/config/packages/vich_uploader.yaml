@@ -3,6 +3,8 @@ vich_uploader:
 
     mappings:
         event:
-            uri_prefix: /media
-            upload_destination: '%kernel.project_dir%/public/images/uploads/events'
+            uri_prefix: /images/uploads
+            upload_destination: '%kernel.project_dir%/public/images/uploads/'
             namer: Vich\UploaderBundle\Naming\OrignameNamer
+            delete_on_update: true
+            delete_on_remove: true
