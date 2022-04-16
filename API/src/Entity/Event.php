@@ -2,11 +2,17 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\EventRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+/**
+ * @Vich\Uploadable
+ */
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 #[ORM\Table(name: "Events")]
 #[ApiResource(
@@ -15,6 +21,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
     ],
     denormalizationContext: [
         'groups' => ['Event:Write']
+    ],
+    collectionOperations: [
+        'get',
+        'post' => [
+            'input_formats' => [
+                'multipart' => ['multipart/form-data'],
+            ],
+        ]
     ],
     itemOperations: [
         'get',
@@ -49,6 +63,19 @@ class Event
     #[Groups(['Event:Read', 'Event:Write'])]
     #[ORM\Column(type: 'datetime')]
     private $date_event;
+
+    #[Groups(['Event:Read', 'Event:Write'])]
+    public ?string $contentUrl = null;
+
+    /**
+    * @Vich\UploadableField(mapping="event", fileNameProperty="filePath")
+    */
+    #[Groups(['Event:Write'])]
+    public ?File $file = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(['Event:Read', 'Event:Write'])] 
+    public ?string $filePath = null;
 
     public function getNumEvent(): ?string
     {
@@ -121,4 +148,5 @@ class Event
 
         return $this;
     }
+
 }
