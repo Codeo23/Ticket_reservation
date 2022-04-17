@@ -1,6 +1,6 @@
 import Indexnavbar from '../../components/Navbar/Indexnavbar';
 
-function App() {
+function Home() {
   return (
     <div className="App">
       <Indexnavbar/>
@@ -33,4 +33,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
