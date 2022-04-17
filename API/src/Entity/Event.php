@@ -8,6 +8,10 @@ use App\Repository\EventRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Range;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -41,23 +45,31 @@ class Event
     #[ORM\Id]
     #[ORM\Column(type: 'string', length: 15)]
     #[Groups(['Event:Read', 'Event:Write'])]
+    #[Length(exactly: 10, exactMessage: 'Le champ doit contenir exactement {{ limit }} caractères')]
     private $num_Event;
 
     #[Groups(['Event:Read', 'Event:Write'])]
     #[ORM\Column(type: 'string', length: 35)]
+    #[Length(min: 2, max: 30)]
+    #[NotBlank(message: 'Ce champ ne doit pas être vide')]
     private $title;
 
     #[Groups(['Event:Read', 'Event:Write'])]
     #[ORM\Column(type: 'string', length: 25)]
+    #[Length(min: 2, max: 30)]
+    #[NotBlank(message: 'Ce champ ne doit pas être vide')]
     private $category;
 
     # defined value ("Enfant", "Jeune", "Adulte")
     #[Groups(['Event:Read', 'Event:Write'])]
     #[ORM\Column(type: 'string', length: 15)]
+    #[NotBlank(message: 'Ce champ ne doit pas être vide')]
+    #[Choice(['Enfant', 'Jeune', 'Adulte'], message: "La valeur doit être Enfant , Jeune ou adulte")]
     private $categoryAge;
 
     #[Groups(['Event:Read', 'Event:Write'])]
     #[ORM\Column(type: 'integer')]
+    #[Range(min: 0.1, max: 1800000000)]
     private $cost;
 
     #[Groups(['Event:Read', 'Event:Write'])]
