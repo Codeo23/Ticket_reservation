@@ -10,5 +10,5 @@
 ###< symfony/framework-bundle ###
 
 ### customization ###
-public/images/
+/public/images/
 ### endcustomization ###
