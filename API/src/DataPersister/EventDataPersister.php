@@ -4,7 +4,6 @@ namespace App\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use App\Entity\Event;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class EventDataPersister implements ContextAwareDataPersisterInterface {
@@ -19,8 +18,16 @@ final class EventDataPersister implements ContextAwareDataPersisterInterface {
     }
 
     public function persist($data, array $context = []) {
-        $data->setNumEvent('E_'.date_format($data->getDateEvent(), 'dmY'));
-        $this->em->persist($data);
+
+        if($context['collection_operation_name'] === 'post'){
+            $data->setNumEvent('E_'.date_format($data->getDateEvent(), 'dmY'));
+            $this->em->persist($data);
+        }
+
+        if($context['item_operation_name'] === 'put'){
+            // send email to client while modifying an event
+        }
+
         $this->em->flush();
 
         return $data;
