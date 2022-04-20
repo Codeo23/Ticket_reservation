@@ -24,7 +24,6 @@ final class EventDataPersister implements ContextAwareDataPersisterInterface {
             $data->setCost((int)$data->getCostToString());
             $data->setDateEvent(new DateTime((string)$data->getDateEventString()));
             $data->setNumEvent('E_'.date_format($data->getDateEvent(), 'dmY'));
-            dd($data);
             $this->em->persist($data);
         }
 
