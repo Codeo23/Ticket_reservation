@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .btn-1-navig{
+        @apply bg-gradient-to-r from-red-600 to-red-500 px-4 py-2;
+    }
+    .btn-2-navig{
+        @apply bg-gradient-to-bl from-red-500 to-red-400 pl-8 py-2 w-full text-left text-sm;
+    }
+}
