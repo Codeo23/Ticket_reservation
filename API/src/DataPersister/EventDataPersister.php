@@ -22,8 +22,9 @@ final class EventDataPersister implements ContextAwareDataPersisterInterface {
 
         if(isset($context['collection_operation_name']) && $context['collection_operation_name'] === 'post'){
             $data->setCost((int)$data->getCostToString());
-            $data->setDateEvent(new DateTime($data->getDate_event_string()));
+            $data->setDateEvent(new DateTime((string)$data->getDateEventString()));
             $data->setNumEvent('E_'.date_format($data->getDateEvent(), 'dmY'));
+            dd($data);
             $this->em->persist($data);
         }
 

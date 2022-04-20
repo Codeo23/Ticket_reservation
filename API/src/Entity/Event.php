@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints\Choice;
+use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
@@ -64,7 +65,7 @@ class Event
     #[Groups(['Event:Read', 'Event:Write'])]
     #[ORM\Column(type: 'string', length: 15)]
     #[NotBlank(message: 'Ce champ ne doit pas être vide')]
-    #[Choice(['Enfant', 'Jeune', 'Adulte'], message: "La valeur doit être Enfant , Jeune ou adulte")]
+    #[Choice(['Enfant', 'Jeune', 'Adulte'], message: "Ce champ devra contenir l'un de ces valeurs: Enfant, Jeune ou Adulte")]
     private $categoryAge;
 
     #[Groups(['Event:Read', 'Event:Write'])]
@@ -74,13 +75,19 @@ class Event
 
     #[Groups(['Event:Read', 'Event:Write'])]
     #[ORM\Column(type: 'datetime')]
+    #[NotBlank(message: 'Ce champ ne doit pas être vide')]
     private $date_event;
 
     #[Groups(['Event:Write'])]
+    #[Range(min: 0, max: 1000000000, invalidMessage: 'Valeur invalide')]
+    #[NotBlank(message: 'Ce champ ne doit pas être vide')]
     private $costToString;
 
     #[Groups(['Event:Write'])]
-    private $date_event_string;
+    #[Length(exactly: 10, exactMessage: 'Le champ doit contenir 10 caractères')]
+    #[Date(message: 'Date invalide')]
+    #[NotBlank(message: 'Ce champ ne doit pas être vide')]
+    private $dateEventString;
 
     #[Groups(['Event:Read', 'Event:Write'])]
     public ?string $contentUrl = null;
@@ -179,14 +186,14 @@ class Event
         return $this;
     }
  
-    public function getDate_event_string(): ?string
+    public function getDateEventString(): ?string
     {
-        return $this->date_event_string;
+        return $this->dateEventString;
     }
  
-    public function setDate_event_string(string $date_event_string)
+    public function setDateEventString(string $dateEventString)
     {
-        $this->date_event_string = $date_event_string;
+        $this->dateEventString = $dateEventString;
 
         return $this;
     }
