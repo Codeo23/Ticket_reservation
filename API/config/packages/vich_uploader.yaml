@@ -1,0 +1,10 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        event:
+            uri_prefix: '%kernel.project_dir%/images/uploads'
+            upload_destination: '%kernel.project_dir%/public/images/uploads/'
+            namer: Vich\UploaderBundle\Naming\OrignameNamer
+            delete_on_update: true
+            delete_on_remove: true
