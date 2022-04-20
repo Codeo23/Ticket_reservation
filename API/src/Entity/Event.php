@@ -44,7 +44,7 @@ class Event
 {
     #[ORM\Id]
     #[ORM\Column(type: 'string', length: 15)]
-    #[Groups(['Event:Read', 'Event:Write'])]
+    #[Groups(['Event:Read'])]
     #[Length(exactly: 10, exactMessage: 'Le champ doit contenir exactement {{ limit }} caractères')]
     private $num_Event;
 
@@ -74,7 +74,6 @@ class Event
 
     #[Groups(['Event:Read', 'Event:Write'])]
     #[ORM\Column(type: 'datetime')]
-    #[NotBlank(message: 'Ce champ ne doit pas être vide')]
     private $date_event;
 
     #[Groups(['Event:Write'])]
