@@ -76,6 +76,12 @@ class Event
     #[ORM\Column(type: 'datetime')]
     private $date_event;
 
+    #[Groups(['Event:Write'])]
+    private $costToString;
+
+    #[Groups(['Event:Write'])]
+    private $date_event_string;
+
     #[Groups(['Event:Read', 'Event:Write'])]
     public ?string $contentUrl = null;
 
@@ -161,4 +167,27 @@ class Event
         return $this;
     }
 
+    public function getCostToString(): string
+    {
+        return $this->costToString;
+    }
+
+    public function setCostToString(string $costToString)
+    {
+        $this->costToString = $costToString;
+
+        return $this;
+    }
+ 
+    public function getDate_event_string(): ?string
+    {
+        return $this->date_event_string;
+    }
+ 
+    public function setDate_event_string(string $date_event_string)
+    {
+        $this->date_event_string = $date_event_string;
+
+        return $this;
+    }
 }
