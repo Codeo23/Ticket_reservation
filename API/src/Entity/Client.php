@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: 'string', length: 15)]
     private $codeCli;
 
     #[ORM\Column(type: 'string', length: 40)]
@@ -21,19 +21,19 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 40, nullable: true)]
     private $firstName;
 
-    #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[ORM\Column(type: 'string', length: 50, unique: true)]
     private $email;
 
     #[ORM\Column(type: 'json')]
     private $roles = [];
 
-    #[ORM\Column(type: 'string')]
+    #[ORM\Column(type: 'string', length: 50)]
     private $password;
 
-    #[ORM\Column(type: 'string', length: 11)]
+    #[ORM\Column(type: 'string', length: 11, unique: true)]
     private $telephone;
 
-    #[ORM\Column(type: 'string', length: 20)]
+    #[ORM\Column(type: 'string', length: 20, unique: true)]
     private $cardNumber;
 
     public function getCodeCli(): string
