@@ -1,2 +1,2 @@
 # Ticket_reservation
-Un application web pour une reservation de place dans un cinema
+Une application web pour une reservation de place dans une salle de cinema
