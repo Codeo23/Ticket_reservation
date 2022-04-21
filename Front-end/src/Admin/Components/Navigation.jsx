@@ -21,7 +21,7 @@ const Navigation = () => {
     });
   };
   return (
-    <div className="h-screen bg-gradient-to-br from-red-600 to-red-900 grow w-2/12 flex flex-col items-center py-3 relative text-slate-100">
+    <div className="h-screen bg-gradient-to-b from-red-900 to-red-600 grow w-2/12 flex flex-col items-center py-3 relative text-slate-100">
       <div className="bg-slate-100 text-slate-800 w-24 h-24 rounded-full flex justify-center items-center">
         <h2>Logo</h2>
       </div>
@@ -46,9 +46,15 @@ const Navigation = () => {
               className="absolute top-1/2 -translate-y-1/2 right-4 text-xs"
             />
           </button>
+<<<<<<< HEAD
           <div className={pilotage ? "grid auto-rows-auto" : "hidden"}>
             <NavLink to="/admin" className="btn-2-navig">
               <FontAwesomeIcon icon={faThLarge} /> <span>Administration</span>
+=======
+          <div className={pilotage ? "grid auto-rows-auto divide-y" : "hidden"}>
+            <NavLink to="/evenement" className="btn-2-navig">
+              <FontAwesomeIcon icon={faThLarge} /> <span>Evénements</span>
+>>>>>>> frontend
             </NavLink>
             <NavLink to="/admin" className="btn-2-navig">
               <FontAwesomeIcon icon={faThLarge} /> <span>Administration</span>

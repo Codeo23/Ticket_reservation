@@ -3,10 +3,24 @@
 @tailwind utilities;
 
 @layer components{
+    input{
+        @apply border;
+    }
+    /*Formulaire events*/
+    input[type="date"]{
+        @apply text-slate-500;
+    }
+    input[type="file"]{
+        @apply border-none text-slate-500;
+    }
+    .input-event{
+        @apply placeholder:text-slate-500 p-1 rounded text-sm;
+    }
+    /*Lien navigation*/
     .btn-1-navig{
-        @apply bg-gradient-to-r from-red-600 to-red-500 px-4 py-2;
+        @apply bg-gradient-to-r from-red-500 to-red-600 py-3 pl-4;
     }
     .btn-2-navig{
-        @apply bg-gradient-to-bl from-red-500 to-red-400 pl-8 py-2 w-full text-left text-sm;
+        @apply bg-gradient-to-r from-red-500 to-red-400 py-2 pl-6;
     }
 }
