@@ -11,9 +11,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private $codeCli;
+
+    #[ORM\Column(type: 'string', length: 40)]
+    private $lastName;
+
+    #[ORM\Column(type: 'string', length: 40, nullable: true)]
+    private $firstName;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     private $email;
@@ -24,9 +29,46 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private $password;
 
-    public function getId(): ?int
+    #[ORM\Column(type: 'string', length: 11)]
+    private $telephone;
+
+    #[ORM\Column(type: 'string', length: 20)]
+    private $cardNumber;
+
+    public function getCodeCli(): string
     {
-        return $this->id;
+        return $this->codeCli;
+    }
+
+    public function setCodeCli(string $codeCli)
+    {
+        $this->codeCli = $codeCli;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): self
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName(?string $firstName): self
+    {
+        $this->firstName = $firstName;
+
+        return $this;
     }
 
     public function getEmail(): ?string
@@ -112,4 +154,28 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getCardNumber(): ?string
+    {
+        return $this->cardNumber;
+    }
+
+    public function setCardNumber(string $cardNumber): self
+    {
+        $this->cardNumber = $cardNumber;
+
+        return $this;
+    } 
 }
