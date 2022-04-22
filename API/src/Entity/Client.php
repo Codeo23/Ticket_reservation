@@ -10,7 +10,17 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
 #[ORM\Table('Clients')]
-#[ApiResource()]
+#[ApiResource(
+    collectionOperations: [
+        'get',
+        'post'
+    ],
+    itemOperations: [
+        'put',
+        'get',
+        'delete'
+    ]
+)]
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
