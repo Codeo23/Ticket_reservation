@@ -62,6 +62,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 20, unique: true)]
     #[Groups(['Client:Read', 'Client:Write'])]
     private $cardNumber;
+    
 
     public function getCodeCli(): string
     {
