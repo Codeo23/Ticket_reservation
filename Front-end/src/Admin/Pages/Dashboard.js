@@ -5,8 +5,12 @@ import "../admin.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {} from "@fortawesome/free-regular-svg-icons";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
 const Dashboard = (props) => {
+  const events = useSelector((state) => state.eventReducer);
+
+  console.log(events);
   return (
     <div className="flex flex-row max-h-screen">
       <Navigation />
