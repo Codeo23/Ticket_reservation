@@ -20,7 +20,7 @@ class ClientDataPersister implements ContextAwareDataPersisterInterface{
     public function persist($data, array $context = [])
     {
         if(isset($context['collection_operation_name']) && $context['collection_operation_name'] === 'post'){
-            $data->setCodeCli($data->getTelephone());
+            $data->setCodeCli('C_'.$data->getTelephone());
             $this->em->persist($data);
         }
         $this->em->flush();
