@@ -34,7 +34,6 @@ const Navigation = () => {
         >
           <FontAwesomeIcon icon={faThLarge} /> <span>Tableau de bord</span>
         </NavLink>
-        {/*Pilotage*/}
         <div className="">
           <button
             className="btn-1-navig w-full text-left relative"
@@ -46,56 +45,46 @@ const Navigation = () => {
               className="absolute top-1/2 -translate-y-1/2 right-4 text-xs"
             />
           </button>
-<<<<<<< HEAD
-<<<<<<< HEAD
           <div className={pilotage ? "grid auto-rows-auto" : "hidden"}>
             <NavLink to="/admin" className="btn-2-navig">
               <FontAwesomeIcon icon={faThLarge} /> <span>Administration</span>
-=======
-          <div className={pilotage ? "grid auto-rows-auto divide-y" : "hidden"}>
-            <NavLink to="/evenement" className="btn-2-navig">
-              <FontAwesomeIcon icon={faThLarge} /> <span>Evénements</span>
->>>>>>> frontend
-=======
-          <div className={pilotage ? "grid auto-rows-auto divide-y" : "hidden"}>
-            <NavLink to="/evenement" className="btn-2-navig">
-              <FontAwesomeIcon icon={faThLarge} /> <span>Evénements</span>
->>>>>>> frontend
             </NavLink>
-            <NavLink to="/admin" className="btn-2-navig">
-              <FontAwesomeIcon icon={faThLarge} /> <span>Administration</span>
+            <NavLink to="/evenement" className="btn-2-navig">
+              <FontAwesomeIcon icon={faThLarge} /> <span>Evénements</span>
             </NavLink>
           </div>
         </div>
-        {/*Personnalisation*/}
-        <div className="">
-          <button
-            className="btn-1-navig w-full text-left relative"
-            onClick={() => affichage(setPersonnalisation, personnalisation)}
-          >
-            <FontAwesomeIcon icon={faUserAlt} /> Personnalisation
-            <FontAwesomeIcon
-              icon={faChevronDown}
-              className="absolute top-1/2 -translate-y-1/2 right-4 text-xs"
-            />
-          </button>
-          <div className={personnalisation ? "grid auto-rows-auto" : "hidden"}>
-            <NavLink to="/admin" className="btn-2-navig">
-              <FontAwesomeIcon icon={faThLarge} /> <span>Administration</span>
-            </NavLink>
-            <NavLink to="/" className="btn-2-navig">
-              <FontAwesomeIcon icon={faThLarge} /> <span>Administration</span>
-            </NavLink>
+          {/*Personnalisation*/}
+          <div className="">
+            <button
+              className="btn-1-navig w-full text-left relative"
+              onClick={() => affichage(setPersonnalisation, personnalisation)}
+            >
+              <FontAwesomeIcon icon={faUserAlt} /> Personnalisation
+              <FontAwesomeIcon
+                icon={faChevronDown}
+                className="absolute top-1/2 -translate-y-1/2 right-4 text-xs"
+              />
+            </button>
+            <div
+              className={personnalisation ? "grid auto-rows-auto" : "hidden"}
+            >
+              <NavLink to="/admin" className="btn-2-navig">
+                <FontAwesomeIcon icon={faThLarge} /> <span>Administration</span>
+              </NavLink>
+              <NavLink to="/" className="btn-2-navig">
+                <FontAwesomeIcon icon={faThLarge} /> <span>Administration</span>
+              </NavLink>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="absolute bottom-3 text-center">
-        <h4>Thèmes</h4>
-        <FontAwesomeIcon icon={faMoon} />
-        <FontAwesomeIcon icon={faSun} />
+        <div className="absolute bottom-3 text-center">
+          <h4>Thèmes</h4>
+          <FontAwesomeIcon icon={faMoon} />
+          <FontAwesomeIcon icon={faSun} />
+        </div>
       </div>
-    </div>
   );
 };
 

@@ -31,11 +31,8 @@
     .btn-2-navig{
         @apply bg-gradient-to-r from-red-500 to-red-400 py-2 pl-6;
     }
-<<<<<<< HEAD
-=======
     /*List events*/
     .col-list-event{
         @apply table-cell border border-slate-500 px-2 py-1;
     }
->>>>>>> frontend
 }
