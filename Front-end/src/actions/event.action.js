@@ -3,7 +3,7 @@ import axios from "axios";
 export const GET_EVENTS = "GET_EVENTS";
 export const ADD_EVENT = "ADD_EVENT";
 
-export const getEvents = () => {
+export const getEvents =  () => {
   return (dispatch) => {
     return axios
       .get("http://localhost:8000/api/events?_sort=date_event&_order=desc")
@@ -15,11 +15,17 @@ export const getEvents = () => {
 };
 
 export const addEvent = (event) => {
+
+  const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
   return (dispatch) => {
     return axios
-      .post("http://localhost:8000/api/events",event)
+      .post("http://localhost:8000/api/events", event,config)
       .then((events) => {
-        dispatch({ type: ADD_EVENT, payload: event });
+        dispatch({ type: ADD_EVENT, payload: event})
       })
       .catch((erreur) => console.log(erreur));
   };

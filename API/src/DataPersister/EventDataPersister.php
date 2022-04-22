@@ -19,8 +19,18 @@ final class EventDataPersister implements ContextAwareDataPersisterInterface {
     }
 
     public function persist($data, array $context = []) {
-        $data->setNumEvent('E_'.date_format($data->getDateEvent(), 'dmY'));
-        $this->em->persist($data);
+
+        if(isset($context['collection_operation_name']) && $context['collection_operation_name'] === 'post'){
+            $data->setCost((int)$data->getCostToString());
+            $data->setDateEvent(new DateTime((string)$data->getDateEventString()));
+            $data->setNumEvent('E_'.date_format($data->getDateEvent(), 'dmY'));
+            $this->em->persist($data);
+        }
+
+        if(isset($context['item_operation_name']) && $context['item_operation_name'] === 'put'){
+            // send email to client while modifying an event
+        }
+
         $this->em->flush();
 
         return $data;

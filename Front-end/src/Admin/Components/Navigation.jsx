@@ -47,9 +47,15 @@ const Navigation = () => {
             />
           </button>
 <<<<<<< HEAD
+<<<<<<< HEAD
           <div className={pilotage ? "grid auto-rows-auto" : "hidden"}>
             <NavLink to="/admin" className="btn-2-navig">
               <FontAwesomeIcon icon={faThLarge} /> <span>Administration</span>
+=======
+          <div className={pilotage ? "grid auto-rows-auto divide-y" : "hidden"}>
+            <NavLink to="/evenement" className="btn-2-navig">
+              <FontAwesomeIcon icon={faThLarge} /> <span>Evénements</span>
+>>>>>>> frontend
 =======
           <div className={pilotage ? "grid auto-rows-auto divide-y" : "hidden"}>
             <NavLink to="/evenement" className="btn-2-navig">
