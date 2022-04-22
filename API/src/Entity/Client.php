@@ -7,10 +7,17 @@ use App\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
 #[ORM\Table('Clients')]
 #[ApiResource(
+    normalizationContext: [
+        'groups' => ['Client:Read']
+    ],
+    denormalizationContext: [
+        'groups' => ['Client:Write']
+    ],
     collectionOperations: [
         'get',
         'post'
@@ -25,27 +32,35 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\Column(type: 'string', length: 15)]
+    #[Groups(['Client:Read'])]
     private $codeCli;
 
     #[ORM\Column(type: 'string', length: 40)]
+    #[Groups(['Client:Read', 'Client:Write'])]
     private $lastName;
 
     #[ORM\Column(type: 'string', length: 40, nullable: true)]
+    #[Groups(['Client:Read', 'Client:Write'])]
     private $firstName;
 
     #[ORM\Column(type: 'string', length: 50, unique: true)]
+    #[Groups(['Client:Read', 'Client:Write'])]
     private $email;
 
     #[ORM\Column(type: 'json')]
+    #[Groups(['Client:Read', 'Client:Write'])]
     private $roles = [];
 
     #[ORM\Column(type: 'string', length: 150)]
+    #[Groups(['Client:Read', 'Client:Write'])]
     private $password;
 
     #[ORM\Column(type: 'string', length: 11, unique: true)]
+    #[Groups(['Client:Read', 'Client:Write'])]
     private $telephone;
 
     #[ORM\Column(type: 'string', length: 20, unique: true)]
+    #[Groups(['Client:Read', 'Client:Write'])]
     private $cardNumber;
 
     public function getCodeCli(): string
