@@ -39,7 +39,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'json')]
     private $roles = [];
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(type: 'string', length: 150)]
     private $password;
 
     #[ORM\Column(type: 'string', length: 11, unique: true)]
