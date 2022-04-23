@@ -23,20 +23,20 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     normalizationContext: [
         'groups' => ['Event:Read']
     ],
-    denormalizationContext: [
-        'groups' => ['Event:Write']
-    ],
     collectionOperations: [
         'get',
         'post' => [
             'input_formats' => [
                 'multipart' => ['multipart/form-data'],
             ],
+            'groups' => ['Event:Write']
         ]
     ],
     itemOperations: [
         'get',
-        'put',
+        'put' => [
+            'groups' => 'Event:Modify'
+        ],
         'delete'
     ]
 )]
@@ -48,43 +48,46 @@ class Event
     #[Length(exactly: 10, exactMessage: 'Le champ doit contenir exactement {{ limit }} caractères')]
     private $num_Event;
 
-    #[Groups(['Event:Read', 'Event:Write'])]
+    #[Groups(['Event:Read', 'Event:Write', 'Event:Modify'])]
     #[ORM\Column(type: 'string', length: 35)]
     #[Length(min: 2, max: 30)]
     #[NotBlank(message: 'Ce champ ne doit pas être vide')]
     private $title;
 
-    #[Groups(['Event:Read', 'Event:Write'])]
+    #[Groups(['Event:Read', 'Event:Write', 'Event:Modify'])]
     #[ORM\Column(type: 'string', length: 25)]
     #[Length(min: 2, max: 30)]
     #[NotBlank(message: 'Ce champ ne doit pas être vide')]
     private $category;
 
     # defined value ("Enfant", "Jeune", "Adulte")
-    #[Groups(['Event:Read', 'Event:Write'])]
+    #[Groups(['Event:Read', 'Event:Write', 'Event:Modify'])]
     #[ORM\Column(type: 'string', length: 15)]
     #[NotBlank(message: 'Ce champ ne doit pas être vide')]
     #[Choice(['Enfant', 'Jeune', 'Adulte'], message: "Ce champ devra contenir l'un de ces valeurs: Enfant, Jeune ou Adulte")]
     private $categoryAge;
 
-    #[Groups(['Event:Read', 'Event:Write'])]
+    #[Groups(['Event:Read', 'Event:Write', 'Event:Modify'])]
     #[ORM\Column(type: 'integer')]
-    #[Range(min: 0.1, max: 1800000000)]
+    #[Range(min: 0.1, max: 1800000000, invalidMessage: 'Valeur invalide')]
+    #[NotBlank(message: 'Ce champ ne doit pas être vide', groups: ['Event:Modify'])]
     private $cost;
 
-    #[Groups(['Event:Read', 'Event:Write'])]
+    #[Groups(['Event:Read', 'Event:Write', 'Event:Modify'])]
     #[ORM\Column(type: 'datetime')]
+    #[Date(message: 'Date invalide', groups: ['Event:Modify'])]
+    #[NotBlank(message: 'Ce champ ne doit pas être vide', groups: ['Event:Modify'])]
     private $date_event;
 
     #[Groups(['Event:Write'])]
     #[Range(min: 0, max: 1000000000, invalidMessage: 'Valeur invalide')]
-    #[NotBlank(message: 'Ce champ ne doit pas être vide')]
+    #[NotBlank(message: 'Ce champ ne doit pas être vide', groups: ['Event:Write'])]
     private $costToString;
 
     #[Groups(['Event:Write'])]
     #[Length(exactly: 10, exactMessage: 'Le champ doit contenir 10 caractères')]
     #[Date(message: 'Date invalide')]
-    #[NotBlank(message: 'Ce champ ne doit pas être vide')]
+    #[NotBlank(message: 'Ce champ ne doit pas être vide', groups: ['Event:Write'])]
     private $dateEventString;
 
     #[Groups(['Event:Read', 'Event:Write'])]
