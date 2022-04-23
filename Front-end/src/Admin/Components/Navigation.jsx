@@ -21,7 +21,7 @@ const Navigation = () => {
     });
   };
   return (
-    <div className="h-screen bg-gradient-to-b from-red-900 to-red-600 grow w-2/12 flex flex-col items-center py-3 relative text-slate-100">
+    <div className="h-screen bg-gradient-to-b from-slate-900 to-slate-700 grow w-2/12 flex flex-col items-center py-3 relative text-slate-100">
       <div className="bg-slate-100 text-slate-800 w-24 h-24 rounded-full flex justify-center items-center">
         <h2>Logo</h2>
       </div>
@@ -29,7 +29,7 @@ const Navigation = () => {
       <div className="m-10 w-full flex flex-col divide-y divide-slate-100">
         <NavLink
           to="/admin"
-          className="btn-1-navig"
+          className={(nav)=>(nav.isActive ? "nav-active btn-1-navig": "btn-1-navig")}
           onClick={() => affichage()}
         >
           <FontAwesomeIcon icon={faThLarge} /> <span>Tableau de bord</span>
@@ -47,10 +47,10 @@ const Navigation = () => {
             />
           </button>
           <div className={pilotage ? "grid auto-rows-auto divide-y" : "hidden"}>
-            <NavLink to="/evenement" className="btn-2-navig">
+            <NavLink to="/evenement" className={(nav)=>(nav.isActive ? "nav-active btn-2-navig": "btn-2-navig")}>
               <FontAwesomeIcon icon={faThLarge} /> <span>Evénements</span>
             </NavLink>
-            <NavLink to="/admin" className="btn-2-navig">
+            <NavLink to="/admin" className={(nav)=>(nav.isActive ? "nav-active btn-2-navig": "btn-2-navig")}>
               <FontAwesomeIcon icon={faThLarge} /> <span>Administration</span>
             </NavLink>
           </div>

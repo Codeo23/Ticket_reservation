@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addEvent } from "../../actions/event.action";
-import eventReducer from "../../Store/event.reducer";
-import axios from "axios";
+import DropFile from "./DropFile";
 
-const AddEventForm = (props) => {
-  const events = useSelector((state) => state.eventReducer);
+const AddEventForm = ({closeModal}) => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [categorie, setCategorie] = useState("");
@@ -14,6 +12,9 @@ const AddEventForm = (props) => {
   const [date, setDate] = useState("");
   const [file, setFile] = useState("");
 
+  const onFileChange = (files)=>{
+    console.log(files);
+  }
   const envoyeDonnee = (e) => {
     e.preventDefault();
     let formData = new FormData();
@@ -27,6 +28,7 @@ const AddEventForm = (props) => {
   };
   return (
     <div className="w-2/4">
+      <button onClick={()=>closeModal(false)}>X</button>
       <h1 className="text-2xl font-semibold">Nouvel événement</h1>
       <form
         className="grid auto-cols-auto gap-y-1"
@@ -70,12 +72,10 @@ const AddEventForm = (props) => {
           value={date}
           onChange={(e) => setDate(e.target.value)}
         />
-        <input
-          type="file"
-          className="input-event"
-          value={file}
-          onChange={(e) => setFile(e.target.value)}
-        />
+        
+        
+        <DropFile onFileChange={(files)=> onFileChange(files)}/>
+        
         <button
           type="submit"
           className="bg-sky-500 py-1 text-white tracking-widest rounded"
