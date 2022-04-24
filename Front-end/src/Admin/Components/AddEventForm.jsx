@@ -2,7 +2,7 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addEvent } from "../../actions/event.action";
+import { addEvent } from "../../store/event.reducer";
 import DropFile from "./DropFile";
 
 const AddEventForm = ({ close }) => {
@@ -25,7 +25,7 @@ const AddEventForm = ({ close }) => {
     formData.append("categoryAge", age);
     formData.append("costToString", prix);
     formData.append("dateEventString", date);
-    formData.append("filePath", file);
+    formData.append("filePath", "test.jpeg");
     dispatch(addEvent(formData));
   };
   return (

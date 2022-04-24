@@ -1,26 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider} from "react-redux";
-import { applyMiddleware, createStore } from "redux";
-import { composeWithDevTools} from "redux-devtools-extension";
-import thunk from "redux-thunk";
-import { getEvents } from "./actions/event.action";
+import { Provider } from "react-redux";
 import App from "./App";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import rootReducer from "./Store";
-
-const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(thunk))
-)
-
-store.dispatch(getEvents())
+import { store } from "./store";
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
-  </Provider>,
+    </Provider>,
   document.getElementById("root")
 );
 

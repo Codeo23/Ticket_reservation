@@ -4,8 +4,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const ListEvent = (props) => {
-  const events = useSelector((state) => state.eventReducer);
-  console.log(events)                                          
+  const events = useSelector((state) => state.events);
+  console.log(events.data[0])                                          
   return (
     <div className="w-full">
       <h3>Evénnement passé</h3>
@@ -21,7 +21,7 @@ const ListEvent = (props) => {
           </div>
         </div>
         <div className="table-row-group text-sm">
-          {events['hydra:member']?events['hydra:member'].map((event) => (
+          {events.data[0]?events.data[0].map((event) => (
             <div
               key={event.num_Event}
               className="table-row border-b border-slate-400"
