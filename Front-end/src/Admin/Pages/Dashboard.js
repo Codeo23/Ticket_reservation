@@ -5,11 +5,8 @@ import "../admin.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {} from "@fortawesome/free-regular-svg-icons";
 import { faCog } from "@fortawesome/free-solid-svg-icons";
-import { useSelector } from "react-redux";
-import Calendar from "../Components/Scheduler";
 
 const Dashboard = (props) => {
-  const events = useSelector((state) => state.eventReducer);
   return (
     <div className="flex flex-row max-h-screen">
       <Navigation />
@@ -35,7 +32,7 @@ const Dashboard = (props) => {
         </div>
         <div>
         </div>
-        <Calendar/>
+        
       </div>
       
     </div>

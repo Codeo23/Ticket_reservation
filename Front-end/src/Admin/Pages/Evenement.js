@@ -10,25 +10,39 @@ import Navigation from "../Components/Navigation";
 import "./../admin.css";
 
 const Evenement = (props) => {
-  const [openModal,setOpenModal] = useState(false);
+  const [modal, setModal] = useState(false);
 
   return (
     <div className="flex flex-row">
-      <Navigation />
-      <div className="grow w-10/12 max-h-screen relative overflow-y-scroll scroll">
+      <Navigation open={modal} />
+      {modal && <AddEventForm close={setModal} />}
+      <div
+        className={
+          modal
+            ? "grow w-10/12 max-h-screen relative overflow-y-scroll scroll opacity-30"
+            : "grow w-10/12 max-h-screen relative overflow-y-scroll scroll"
+        }
+      >
         <Header />
         <div className="px-5 mt-10">
-          <div className="futur bg-red-900 w-1/5 p-2 mb-5 rounded text-slate-300">
-            <FontAwesomeIcon icon={faCalendar} /> <span> 22-05-1988</span>&nbsp;
-            <FontAwesomeIcon icon={faClock} />
-            <span>15:00</span><br/>
-            <FontAwesomeIcon icon={faFileVideo} /> Wrath of Man
+          <button
+            onClick={() => setModal(true)}
+            className="bg-red-900 p-2 rounded text-white"
+          >
+            Nouvel événement
+          </button>
+          <div className="flex">
+            <div className="futur grow w-2/6 p-2 mb-5 rounded grid row-auto mt-5 border border-slate-200">
+              <span><FontAwesomeIcon icon={faCalendar} /> 22-05-1988</span>
+              <span><FontAwesomeIcon icon={faClock} /> 15:00</span>
+              <span><FontAwesomeIcon icon={faFileVideo} /> Wrath of Man</span>
+              <img src="images/img1.jpg" alt=""/>
+            </div>
+            <div className="grow w-4/6 mb-5 pl-6">
+              <ChartEvents />
+            </div>
           </div>
-          <button onClick={()=>setOpenModal(true)}>Open</button>
-          {openModal && <AddEventForm closeModal={setOpenModal}/>}
-          <div>
-            <ChartEvents/>
-          </div>
+
           <ListEvent />
         </div>
       </div>

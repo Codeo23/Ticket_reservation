@@ -27,17 +27,15 @@
     .nav-active{
         @apply bg-red-900;
     }
-    .btn-1-navig{
+    .btn-navig{
         @apply py-3 pl-4;
-    }
-    .btn-2-navig{
-        @apply py-2 pl-6;
     }
     /*List events*/
     .col-list-event{
         @apply table-cell border border-slate-500 px-2 py-1;
     }
 }
+
 
 /*Drop*/
 

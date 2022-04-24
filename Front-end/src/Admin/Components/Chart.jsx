@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from "react";
 import {
   Chart as ChartJS,
   LinearScale,
@@ -8,9 +8,8 @@ import {
   LineElement,
   Legend,
   Tooltip,
-} from 'chart.js';
-import { Chart } from 'react-chartjs-2';
-import { faker } from '@faker-js/faker';
+} from "chart.js";
+import { Chart } from "react-chartjs-2";
 
 ChartJS.register(
   LinearScale,
@@ -22,32 +21,38 @@ ChartJS.register(
   Tooltip
 );
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const labels = ["January", "February", "March", "April", "May", "June", "July"];
 
 export const data = {
   labels,
   datasets: [
     {
-      type: 'line' ,
-      label: 'Dataset 1',
-      borderColor: 'rgb(255, 99, 132)',
+      type: "line",
+      label: "maximum",
+      borderColor: "rgb(127,29,29)",
       borderWidth: 2,
       fill: false,
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+      data: [40,60,90,80,40,80,90,60],
     },
     {
-      type: 'bar' ,
-      label: 'Dataset 2',
-      backgroundColor: 'rgb(75, 192, 192)',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
-      borderColor: 'white',
+      type: "bar",
+      label: "1st",
+      backgroundColor: "rgb(75, 192, 192)",
+      data: [20,50,20,70,40,80,90,60],
+      borderColor: "white",
       borderWidth: 2,
     },
     {
-      type: 'bar' ,
-      label: 'Dataset 3',
-      backgroundColor: 'rgb(53, 162, 235)',
-      data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+      type: "bar",
+      label: "2nd",
+      backgroundColor: "rgb(127,29,29)",
+      data: [40,60,90,80,40,80,90,60],
+    },
+    {
+      type: "bar",
+      label: "3rd",
+      backgroundColor: "rgb(53, 162, 235)",
+      data: [40,50,70,40],
     },
   ],
 };
@@ -93,5 +98,5 @@ export function ChartEvents() {
     triggerTooltip(chart);
   }, []);
 
-  return <Chart ref={chartRef} type='bar' data={data} />;
+  return <Chart ref={chartRef} type="bar" data={data}/>;
 }

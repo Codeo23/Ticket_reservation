@@ -7,7 +7,7 @@ const ListEvent = (props) => {
   const events = useSelector((state) => state.eventReducer);
   console.log(events)                                          
   return (
-    <div className="w-3/4">
+    <div className="w-full">
       <h3>Evénnement passé</h3>
       <div className="table border-collapse border border-slate-600 w-full">
         <div className="table-header-group bg-slate-300 text-lg">
