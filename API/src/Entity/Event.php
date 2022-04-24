@@ -45,7 +45,6 @@ class Event
     #[ORM\Id]
     #[ORM\Column(type: 'string', length: 15)]
     #[Groups(['Event:Read'])]
-    #[Length(exactly: 10, exactMessage: 'Le champ doit contenir exactement {{ limit }} caractères')]
     private $num_Event;
 
     #[Groups(['Event:Read', 'Event:Write', 'Event:Modify'])]
@@ -70,13 +69,11 @@ class Event
     #[Groups(['Event:Read', 'Event:Write', 'Event:Modify'])]
     #[ORM\Column(type: 'integer')]
     #[Range(min: 0.1, max: 1800000000, invalidMessage: 'Valeur invalide')]
-    #[NotBlank(message: 'Ce champ ne doit pas être vide', groups: ['Event:Modify'])]
     private $cost;
 
     #[Groups(['Event:Read', 'Event:Write', 'Event:Modify'])]
     #[ORM\Column(type: 'datetime')]
     #[Date(message: 'Date invalide', groups: ['Event:Modify'])]
-    #[NotBlank(message: 'Ce champ ne doit pas être vide', groups: ['Event:Modify'])]
     private $date_event;
 
     #[Groups(['Event:Write'])]
