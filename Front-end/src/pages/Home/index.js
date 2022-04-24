@@ -1,5 +1,5 @@
 import Indexnavbar from '../../components/Navbar/Indexnavbar';
-import EventCard from '../../components/Navbar/cards/eventCard';
+import EventCard from '../../Admin/cards/eventCard';
 import Footer from '../../components/footer/Indexfooter';
 
 function Home() {
