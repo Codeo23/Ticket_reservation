@@ -35,7 +35,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
     itemOperations: [
         'get',
         'put' => [
-            'groups' => 'Event:Modify'
+            'groups' => 'Event:Edit'
         ],
         'delete'
     ]
@@ -47,33 +47,33 @@ class Event
     #[Groups(['Event:Read'])]
     private $num_Event;
 
-    #[Groups(['Event:Read', 'Event:Write', 'Event:Modify'])]
+    #[Groups(['Event:Read', 'Event:Write', 'Event:Edit'])]
     #[ORM\Column(type: 'string', length: 35)]
     #[Length(min: 2, max: 30)]
     #[NotBlank(message: 'Ce champ ne doit pas être vide')]
     private $title;
 
-    #[Groups(['Event:Read', 'Event:Write', 'Event:Modify'])]
+    #[Groups(['Event:Read', 'Event:Write', 'Event:Edit'])]
     #[ORM\Column(type: 'string', length: 25)]
     #[Length(min: 2, max: 30)]
     #[NotBlank(message: 'Ce champ ne doit pas être vide')]
     private $category;
 
     # defined value ("Enfant", "Jeune", "Adulte")
-    #[Groups(['Event:Read', 'Event:Write', 'Event:Modify'])]
+    #[Groups(['Event:Read', 'Event:Write', 'Event:Edit'])]
     #[ORM\Column(type: 'string', length: 15)]
     #[NotBlank(message: 'Ce champ ne doit pas être vide')]
     #[Choice(['Enfant', 'Jeune', 'Adulte'], message: "Ce champ devra contenir l'un de ces valeurs: Enfant, Jeune ou Adulte")]
     private $categoryAge;
 
-    #[Groups(['Event:Read', 'Event:Write', 'Event:Modify'])]
+    #[Groups(['Event:Read', 'Event:Write', 'Event:Edit'])]
     #[ORM\Column(type: 'integer')]
     #[Range(min: 0.1, max: 1800000000, invalidMessage: 'Valeur invalide')]
     private $cost;
 
-    #[Groups(['Event:Read', 'Event:Write', 'Event:Modify'])]
+    #[Groups(['Event:Read', 'Event:Write', 'Event:Edit'])]
     #[ORM\Column(type: 'datetime')]
-    #[Date(message: 'Date invalide', groups: ['Event:Modify'])]
+    #[Date(message: 'Date invalide', groups: ['Event:Edit'])]
     private $date_event;
 
     #[Groups(['Event:Write'])]
