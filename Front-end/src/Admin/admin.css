@@ -23,13 +23,6 @@
     .input-event{
         @apply placeholder:text-slate-500 p-1 rounded text-sm;
     }
-    /*Lien navigation*/
-    .nav-active{
-        @apply bg-red-900;
-    }
-    .btn-navig{
-        @apply py-3 pl-4;
-    }
     /*List events*/
     .col-list-event{
         @apply table-cell border border-slate-500 px-2 py-1;

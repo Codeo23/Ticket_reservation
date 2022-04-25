@@ -2,11 +2,11 @@ import { faCalendar, faFileVideo } from "@fortawesome/free-regular-svg-icons";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import AddEventForm from "../Components/AddEventForm";
-import { ChartEvents } from "../Components/Chart";
+import AddEventForm from "../Components/events/AddEventForm";
+import { ChartEvents } from "../Components/events/Chart";
 import Header from "../Components/Header";
-import ListEvent from "../Components/ListEvent";
-import Navigation from "../Components/Navigation";
+import ListEvent from "../Components/events/ListEvent";
+import Navigation from "../Components/navigation/Navigation";
 import "./../admin.css";
 
 const Evenement = (props) => {
@@ -14,14 +14,11 @@ const Evenement = (props) => {
 
   return (
     <div className="flex flex-row">
-      <Navigation open={modal} />
+      <Navigation/>
+      {modal &&<div className="fixed w-screen h-screen bg-black bg-opacity-80 z-10" onClick={()=>setModal(false)}></div>}
       {modal && <AddEventForm close={setModal} />}
       <div
-        className={
-          modal
-            ? "grow w-10/12 max-h-screen relative overflow-y-scroll scroll opacity-30"
-            : "grow w-10/12 max-h-screen relative overflow-y-scroll scroll"
-        }
+        className="grow w-full max-h-screen relative overflow-y-scroll scroll"
       >
         <Header />
         <div className="px-5 mt-10">

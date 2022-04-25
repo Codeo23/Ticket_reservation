@@ -1,24 +1,19 @@
 import React from "react";
-import Header from "../Components/Header";
 import Navigation from "../Components/navigation/Navigation";
-import "../admin.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {} from "@fortawesome/free-regular-svg-icons";
+import Header from "../Components/Header";
 
-const Dashboard = (props) => {
+const Clients = (props) => {
   return (
     <div className="flex flex-row">
       <Navigation />
       <div className="grow w-full max-h-screen overflow-y-scroll scroll">
         <Header />
         <div className="p-3 mt-10">
-          <div>
-            
-          </div>
+            Clients
         </div>
       </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default Clients;

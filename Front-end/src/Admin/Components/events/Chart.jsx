@@ -21,22 +21,22 @@ ChartJS.register(
   Tooltip
 );
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+const labels = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"];
 
 export const data = {
   labels,
   datasets: [
     {
-      type: "line",
-      label: "maximum",
-      borderColor: "rgb(127,29,29)",
+      type: "bar",
+      label: "1st",
+      backgroundColor: "rgb(255,255,255)",
       borderWidth: 2,
       fill: false,
       data: [40,60,90,80,40,80,90,60],
     },
     {
       type: "bar",
-      label: "1st",
+      label: "2nd",
       backgroundColor: "rgb(75, 192, 192)",
       data: [20,50,20,70,40,80,90,60],
       borderColor: "white",
@@ -44,13 +44,13 @@ export const data = {
     },
     {
       type: "bar",
-      label: "2nd",
+      label: "3rd",
       backgroundColor: "rgb(127,29,29)",
       data: [40,60,90,80,40,80,90,60],
     },
     {
       type: "bar",
-      label: "3rd",
+      label: "4th",
       backgroundColor: "rgb(53, 162, 235)",
       data: [40,50,70,40],
     },

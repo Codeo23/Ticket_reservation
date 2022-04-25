@@ -1,14 +1,17 @@
 import { faCircleInfo, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteEvent } from "../../../store/event.reducer";
+
 
 const ListEvent = (props) => {
   const events = useSelector((state) => state.events);
-  console.log(events.data[0])                                          
+  const dispatch = useDispatch();
+  console.log(events)                                          
   return (
     <div className="w-full">
-      <h3>Evénnement passé</h3>
+      <h3>Evénement passé</h3>
       <div className="table border-collapse border border-slate-600 w-full">
         <div className="table-header-group bg-slate-300 text-lg">
           <div className="table-row rounded">
@@ -33,7 +36,7 @@ const ListEvent = (props) => {
               <div className="table-cell px-2 py-1">{event.date_event}</div>
               <div className="table-cell px-2 py-1 text-center text-lg space-x-1.5">
                 <FontAwesomeIcon icon={faCircleInfo}/>
-                <FontAwesomeIcon icon={faTrash}/>
+                <FontAwesomeIcon icon={faTrash} onClick={()=>dispatch(deleteEvent(event.num_Event))}/>
               </div>
             </div>
           )): <span>En cours de reception des données</span>}
