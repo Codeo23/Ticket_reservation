@@ -27,7 +27,7 @@ const AddEventForm = ({ close }) => {
     formData.append("categoryAge", newEvent.age);
     formData.append("costToString", newEvent.prix);
     formData.append("dateEventString", newEvent.date);
-    formData.append("filePath", "test");
+    formData.append("file", newEvent.file);
     dispatch(addEvent(formData));
     dispatch(getEvents());
   };
@@ -101,9 +101,8 @@ const AddEventForm = ({ close }) => {
           </div>
           <input
             type="file"
-            value={newEvent.file}
             required
-            onChange={(e) => setNewEvent({ ...newEvent, file: e.target.value })}
+            onChange={(e) => setNewEvent({ ...newEvent, file: e.target.files[0] })}
             className="absolute w-full h-full top-0 left-0 opacity-0 cursor-pointer"
           />
         </div>
