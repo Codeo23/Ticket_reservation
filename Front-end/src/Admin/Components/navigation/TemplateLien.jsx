@@ -13,7 +13,7 @@ const Lien = ({lien,icone,text}) => {
           }
         >
       {revele ? (
-        <span className="flex justify-center text-xl"><FontAwesomeIcon icon={icone}/></span>
+        <span className="flex justify-center"><FontAwesomeIcon icon={icone}/></span>
       ) : (
         <span>
           <FontAwesomeIcon icon={icone} className="pl-4"/> {text}

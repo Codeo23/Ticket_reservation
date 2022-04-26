@@ -9,13 +9,11 @@ const Dashboard = (props) => {
   return (
     <div className="flex flex-row">
       <Navigation />
-      <div className="grow w-4/5 max-h-screen overflow-y-scroll scroll relative">
+      <div className="grow w-full max-h-screen overflow-y-scroll scroll relative">
         <Header />
-        <div className="p-3">
-          <ListResume className=""/>
-          <div className="w-8/12">
-            <ChartCA />
-          </div>
+        <div>
+          <ListResume/>
+          <ChartCA/>
         </div>
       </div>
     </div>
