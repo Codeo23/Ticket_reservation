@@ -29,7 +29,7 @@ const AddEventForm = ({ close }) => {
     formData.append("dateEventString", newEvent.date);
     formData.append("file", newEvent.file);
     dispatch(addEvent(formData));
-    dispatch(getEvents());
+    close(false);
   };
   return (
     <div className="w-auto absolute bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 p-3 rounded">

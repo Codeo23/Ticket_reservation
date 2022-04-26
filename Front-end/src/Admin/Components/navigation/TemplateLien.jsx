@@ -9,7 +9,7 @@ const Lien = ({lien,icone,text}) => {
     <NavLink
           to={lien}
           className={(nav) =>
-            nav.isActive ? "bg-slate-600 bg-opacity-30 py-3" : "py-3"
+            nav.isActive ? "text-red-900 py-2.5 tracking-wider uppercase " : "py-2.5 tracking-wider uppercase  hover:text-slate-600"
           }
         >
       {revele ? (

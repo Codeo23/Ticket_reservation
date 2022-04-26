@@ -8,7 +8,7 @@ import { reveleNavig } from '../../store/admin.reducer';
 const Header = (props) => {
     const dispatch = useDispatch();
     return (
-        <div className='fixed w-full py-1 px-3 text-slate-700'>
+        <div className='w-full py-1 px-3 text-white bg-red-900 h-3/6 -z-20'>
             <FontAwesomeIcon icon={faList} className="text-xl cursor-pointer" onClick={()=>dispatch(reveleNavig())}/>
         </div>
     );

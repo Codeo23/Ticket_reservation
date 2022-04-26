@@ -18,24 +18,14 @@ const Navigation = () => {
     <div
       className={
         !revele
-          ? "h-screen bg-slate-900 grow w-2/12 flex flex-col items-center relative text-slate-100 text-opacity-70"
-          : "h-screen bg-slate-900 grow w-10 flex flex-col items-center relative text-slate-100 text-opacity-70"
+          ? "h-screen bg-white grow w-1/5 flex flex-col relative text-slate-500 font-semibold text-sm border border-r-2"
+          : "h-screen bg-white grow w-10 flex flex-col items-center relative text-slate-700"
       }
     >
       {!revele ? (
-        <>
-          <span className="bg-black bg-opacity-50 w-full text-center font-bold text-2xl py-1">
-            E-Ticket
+          <span className="py-5 pl-4">
+            TechArmy-CINE
           </span>
-          <span className="my-4">
-            <img
-              src="images/canv2.png"
-              alt="admin"
-              className="h-20 w-20 object-cover rounded-full"
-            />
-            <p>Kara Smith</p>
-          </span>
-        </>
       ):(<span className="mb-5">
             <img
               src="images/canv2.png"
@@ -50,7 +40,6 @@ const Navigation = () => {
         <Lien lien="/calendrier" icone={faCalendarWeek} text="Calendrier" />
         <Lien lien="/clients" icone={faUser} text="Clients" />
         <Lien lien="/reservation" icone={faTicketSimple} text="Réservation" />
-        <Lien lien="/settings" icone={faCog} text="Paramètres" />
       </div>
     </div>
   );

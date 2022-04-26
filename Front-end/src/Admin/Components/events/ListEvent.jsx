@@ -8,10 +8,17 @@ import { deleteEvent } from "../../../store/event.reducer";
 const ListEvent = (props) => {
   const events = useSelector((state) => state.events);
   const dispatch = useDispatch();
+  const pathImage = (path)=>{
+    const vraiPath =path.split("/API");
+    vraiPath.splice(1,0,'/API/public');
+    console.log(vraiPath.join(''));
+    return vraiPath.join('');
+  }
   console.log(events)                                          
   return (
     <div className="w-full">
-      <h3>Evénement passé</h3>
+      <h3>Evénement passé</h3> 
+      <img src="http://localhost:8000/images/uploads/62679952dc402_1648306178931.jpg" alt="test" className="w-full h-full"/>
       <div className="table border-collapse border border-slate-600 w-full">
         <div className="table-header-group bg-slate-300 text-lg">
           <div className="table-row rounded">
@@ -29,14 +36,15 @@ const ListEvent = (props) => {
               key={event.num_Event}
               className="table-row border-b border-slate-400"
             >
+              <img src="/media/safidy/SAFIDY/1648306178931.jpg" alt="test" className="w-full h-full"/>
               <div className="table-cell px-2 py-1">{event.num_Event}</div>
               <div className="table-cell px-2 py-1">{event.title}</div>
               <div className="table-cell px-2 py-1">{event.category}</div>
               <div className="table-cell px-2 py-1">{event.categoryAge}</div>
-              <div className="table-cell px-2 py-1">{event.date_event}</div>
+              <div className="table-cell px-2 py-1"></div>
               <div className="table-cell px-2 py-1 text-center text-lg space-x-1.5">
-                <FontAwesomeIcon icon={faCircleInfo}/>
-                <FontAwesomeIcon icon={faTrash} onClick={()=>dispatch(deleteEvent(event.num_Event))}/>
+                <FontAwesomeIcon icon={faCircleInfo} onClick={()=>pathImage(event.contentUrl)}/>
+                <FontAwesomeIcon icon={faTrash} /*onClick={()=>dispatch(deleteEvent(event.num_Event))}*//>
               </div>
             </div>
           )): <span>En cours de reception des données</span>}
