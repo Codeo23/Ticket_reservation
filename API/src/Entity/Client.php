@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
 #[ORM\Table('Clients')]
@@ -37,14 +38,17 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 40)]
     #[Groups(['Client:Read', 'Client:Write'])]
+    #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
     private $lastName;
 
     #[ORM\Column(type: 'string', length: 40, nullable: true)]
     #[Groups(['Client:Read', 'Client:Write'])]
+    #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
     private $firstName;
 
     #[ORM\Column(type: 'string', length: 50, unique: true)]
     #[Groups(['Client:Read', 'Client:Write'])]
+    #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
     private $email;
 
     #[ORM\Column(type: 'json')]
@@ -53,14 +57,17 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string', length: 150)]
     #[Groups(['Client:Read', 'Client:Write'])]
+    #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
     private $password;
 
     #[ORM\Column(type: 'string', length: 11, unique: true)]
     #[Groups(['Client:Read', 'Client:Write'])]
+    #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
     private $telephone;
 
     #[ORM\Column(type: 'string', length: 20, unique: true)]
     #[Groups(['Client:Read', 'Client:Write'])]
+    #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
     private $cardNumber;
     
 
