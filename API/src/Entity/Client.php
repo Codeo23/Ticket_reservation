@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
@@ -39,16 +41,21 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 40)]
     #[Groups(['Client:Read', 'Client:Write'])]
     #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
+    #[Length(min: 3, max: 40, minMessage: 'Caractère minimum approuvé {{ limit }}', 
+            maxMessage: 'Caractère maximum approuvé {{ limit }}')]
     private $lastName;
 
     #[ORM\Column(type: 'string', length: 40, nullable: true)]
     #[Groups(['Client:Read', 'Client:Write'])]
     #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
+    #[Length(min: 3, max: 40, minMessage: 'Caractère minimum approuvé {{ limit }}', 
+            maxMessage: 'Caractère maximum approuvé {{ limit }}')]
     private $firstName;
 
     #[ORM\Column(type: 'string', length: 50, unique: true)]
     #[Groups(['Client:Read', 'Client:Write'])]
     #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
+    #[Email(message: 'Email invalide')]
     private $email;
 
     #[ORM\Column(type: 'json')]
@@ -58,16 +65,20 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 150)]
     #[Groups(['Client:Read', 'Client:Write'])]
     #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
+    #[Length(min: 5, max: 60, minMessage: 'Caractère minimum approuvé {{ limit }}', 
+            maxMessage: 'Caractère maximum approuvé {{ limit }}')]
     private $password;
 
     #[ORM\Column(type: 'string', length: 11, unique: true)]
     #[Groups(['Client:Read', 'Client:Write'])]
     #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
+    #[Length(exactly: 10, exactMessage: 'Le champ doit contenir {{ limit }} chiffres')]
     private $telephone;
 
     #[ORM\Column(type: 'string', length: 20, unique: true)]
     #[Groups(['Client:Read', 'Client:Write'])]
     #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
+    #[Length(exactly: 16, exactMessage: 'Numero de la carte invalide')]
     private $cardNumber;
     
 
