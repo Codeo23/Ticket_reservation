@@ -80,7 +80,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 20, unique: true)]
     #[Groups(['Client:Read', 'Client:Write'])]
     #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
-    #[Length(exactly: 16, exactMessage: 'Numero de la carte invalide')]
+    #[Length(exactly: 16, exactMessage: 'Carte invalide')]
     private $cardNumber;
     
 
