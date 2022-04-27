@@ -74,7 +74,6 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['Client:Read', 'Client:Write'])]
     #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
     #[Length(exactly: 10, exactMessage: 'Le champ doit contenir {{ limit }} chiffres')]
-    #[Regex(pattern: '/^\(0\)[0-9]*$', message: 'Ce champ accepte seulement les nombres')]
     private $telephone;
 
     #[ORM\Column(type: 'string', length: 20, unique: true)]
