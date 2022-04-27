@@ -97,7 +97,7 @@ class Event
     public ?File $file = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['Event:Write'])] 
+    #[Groups(['Event:Read', 'Event:Write'])] 
     public ?string $filePath = null;
 
     public function getNumEvent(): ?string
