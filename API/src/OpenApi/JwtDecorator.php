@@ -19,7 +19,6 @@ final class JwtDecorator implements OpenApiFactoryInterface
     {
         $openApi = ($this->decorated)($context);
         $schemas = $openApi->getComponents()->getSchemas();
-
         $schemas['Token'] = new \ArrayObject([
             'type' => 'object',
             'properties' => [
@@ -38,11 +37,10 @@ final class JwtDecorator implements OpenApiFactoryInterface
                 ],
                 'password' => [
                     'type' => 'string',
-                    'example' => 'apassword',
+                    'example' => 'password',
                 ],
             ],
         ]);
-
         $pathItem = new Model\PathItem(
             ref: 'JWT Token',
             post: new Model\Operation(
