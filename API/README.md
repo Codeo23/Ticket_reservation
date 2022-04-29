@@ -8,6 +8,7 @@
     # you should change the db_user, db_password, db_name
 
  <h3>Final step: Execute the following command :</h3>
+    
     php bin/console lexik:jwt:generate-keypair    // generate private and public keys for signing JWTokens 
     php bin/console doctrine:database:create
     php bin/console make:migration
