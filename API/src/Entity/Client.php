@@ -24,7 +24,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
         ],
         'post' => [
             'groups' => ['Client:Write'],
-            'security' => "is_granted('ROLE_ADMIN')"
         ]
     ],
     itemOperations: [
