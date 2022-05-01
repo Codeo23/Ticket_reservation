@@ -30,10 +30,10 @@ use Symfony\Component\Validator\Constraints\NotBlank;
         ]
     ],
     itemOperations: [
-        'put',
         'get' => [
             'security' => "is_granted('ROLE_ADMIN')"
         ],
+        'put',
         'delete'
     ]
 )]
