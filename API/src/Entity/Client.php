@@ -18,14 +18,12 @@ use Symfony\Component\Validator\Constraints\NotBlank;
     normalizationContext: [
         'groups' => ['Client:Read']
     ],
-    denormalizationContext: [
-        'groups' => ['Client:Write']
-    ],
     collectionOperations: [
         'get' => [
             'security' => "is_granted('ROLE_ADMIN')"
         ],
         'post' => [
+            'groups' => ['Client:Write'],
             'security' => "is_granted('ROLE_ADMIN')"
         ]
     ],
@@ -33,7 +31,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
         'get' => [
             'security' => "is_granted('ROLE_ADMIN')"
         ],
-        'put',
+        'put' => [
+            'groups' => ['Client:Edit']
+        ],
         'delete'
     ]
 )]
@@ -59,13 +59,13 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     private $firstName;
 
     #[ORM\Column(type: 'string', length: 50, unique: true)]
-    #[Groups(['Client:Read', 'Client:Write'])]
+    #[Groups(['Client:Read', 'Client:Write', 'Client:Edit'])]
     #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
     #[Email(message: 'Email invalide')]
     private $email;
 
     #[ORM\Column(type: 'json')]
-    #[Groups(['Client:Read', 'Client:Write'])]
+    #[Groups(['Client:Read', 'Client:Write', 'Client:Edit'])]
     private $roles = [];
 
     #[ORM\Column(type: 'string', length: 150)]
@@ -76,13 +76,13 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     #[ORM\Column(type: 'string', length: 11, unique: true)]
-    #[Groups(['Client:Read', 'Client:Write'])]
+    #[Groups(['Client:Read', 'Client:Write', 'Client:Edit'])]
     #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
     #[Length(exactly: 10, exactMessage: 'Le champ doit contenir {{ limit }} chiffres')]
     private $telephone;
 
     #[ORM\Column(type: 'string', length: 20, unique: true)]
-    #[Groups(['Client:Read', 'Client:Write'])]
+    #[Groups(['Client:Read', 'Client:Write', 'Client:Edit'])]
     #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
     #[Length(exactly: 16, exactMessage: 'Carte invalide')]
     private $cardNumber;
