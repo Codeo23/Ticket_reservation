@@ -1,3 +1,5 @@
+<h1>Configuration</h1>
+
 <h3>First step: Install all dependencies via composer :</h3>
   
     composer install
@@ -8,8 +10,8 @@
     # you should change the db_user, db_password, db_name
 
  <h3>Final step: Execute the following command :</h3>
-    
-    php bin/console lexik:jwt:generate-keypair    // generate private and public keys for signing JWTokens 
+ 
+    php bin/console lexik:jwt:generate-keypair //generate private and public keys for signing JWTokens 
     php bin/console doctrine:database:create
     php bin/console make:migration
     php bin/console doctrine:migrations:migrate
@@ -21,3 +23,20 @@
     
     // if you want to run it with php command
     php -S localhost:8000 -t public/   
+
+
+<h1>Manual</h1>
+
+<h2>Authorization and access on the ressources</h2>
+
+<h3>Event:</h3>
+
+    Read Collections/Item => PUBLIC_ACCESS
+    Creation, Modification and Deletion => ADMIN
+
+<h3>Client:</h3>
+
+    Read Collections, Registration => PUBLIC_ACCESS
+    Read Items => OWNER/ADMIN (Password cannot be read)
+    Modification => OWNER (Password cannot be modified)
+    Deletion => OWNER/ADMIN

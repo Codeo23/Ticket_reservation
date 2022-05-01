@@ -29,15 +29,19 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
             'input_formats' => [
                 'multipart' => ['multipart/form-data'],
             ],
-            'groups' => ['Event:Write']
+            'groups' => ['Event:Write'],
+            'security' => "is_granted('ROLE_ADMIN')"    
         ]
     ],
     itemOperations: [
         'get',
         'put' => [
-            'groups' => 'Event:Edit'
+            'groups' => 'Event:Edit',
+            'security' => "is_granted('ROLE_ADMIN')"    
         ],
-        'delete'
+        'delete' => [
+            'security' => "is_granted('ROLE_ADMIN')"    
+        ]
     ]
 )]
 class Event
