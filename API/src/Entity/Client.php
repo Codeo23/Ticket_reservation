@@ -34,7 +34,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
         'put' => [
             'groups' => ['Client:Edit']
         ],
-        'delete'
+        'delete' => [
+            'security' => "is_granted('ROLE_ADMIN')"
+        ]
     ]
 )]
 class Client implements UserInterface, PasswordAuthenticatedUserInterface
