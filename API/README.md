@@ -38,5 +38,5 @@
 
     Read Collections, Registration => PUBLIC_ACCESS
     Read Items => OWNER/ADMIN (Password cannot be read)
-    Modification => OWNER (Password cannot be modified)
+    Modification => OWNER (This fields are able for modification: email, roles, telephone, cardNumber)
     Deletion => OWNER/ADMIN
