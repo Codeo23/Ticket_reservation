@@ -1,5 +1,4 @@
 <?php
-// api/src/OpenApi/JwtDecorator.php
 
 declare(strict_types=1);
 
