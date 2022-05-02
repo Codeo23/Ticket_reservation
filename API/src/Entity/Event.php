@@ -47,7 +47,11 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class Event
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'string', length: 15)]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private $id;
+
+    #[ORM\Column(type: 'string', length: 15, unique: true)]
     #[Groups(['Event:Read'])]
     private $num_Event;
 
@@ -58,7 +62,7 @@ class Event
     private $title;
 
     #[Groups(['Event:Read', 'Event:Write', 'Event:Edit'])]
-    #[ORM\Column(type: 'string', length: 25)]
+    #[ORM\Column(type: 'string', length: 25, unique: true)]
     #[Length(min: 2, max: 30)]
     #[NotBlank(message: 'Ce champ ne doit pas être vide')]
     private $category;
@@ -76,7 +80,7 @@ class Event
     private $cost;
 
     #[Groups(['Event:Read', 'Event:Write', 'Event:Edit'])]
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: 'datetime', unique: true)]
     #[Date(message: 'Date invalide', groups: ['Event:Edit'])]
     private $date_event;
 
@@ -103,6 +107,11 @@ class Event
     #[ORM\Column(nullable: true)]
     #[Groups(['Event:Read', 'Event:Write'])] 
     public ?string $filePath = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getNumEvent(): ?string
     {
