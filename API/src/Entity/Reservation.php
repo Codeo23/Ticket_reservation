@@ -6,6 +6,7 @@ use App\Repository\ReservationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
+#[ORM\Table(name: 'Reservations')]
 class Reservation
 {
     #[ORM\Id]
@@ -20,7 +21,7 @@ class Reservation
     private $dateReservation;
 
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'reservations')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, referencedColumnName: 'codeCli')]
     private $client;
 
     #[ORM\ManyToOne(targetEntity: Event::class, inversedBy: 'reservations')]
