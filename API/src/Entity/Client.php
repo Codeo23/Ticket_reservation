@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ClientRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -87,6 +89,14 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
     #[Length(exactly: 16, exactMessage: 'Carte invalide')]
     private $cardNumber;
+
+    #[ORM\OneToMany(mappedBy: 'Client', targetEntity: Reservation::class, orphanRemoval: true)]
+    private $reservations;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
     
 
     public function getCodeCli(): string
@@ -229,6 +239,36 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCardNumber(string $cardNumber): self
     {
         $this->cardNumber = $cardNumber;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getClient() === $this) {
+                $reservation->setClient(null);
+            }
+        }
 
         return $this;
     } 

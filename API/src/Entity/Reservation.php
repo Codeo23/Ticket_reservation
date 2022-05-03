@@ -19,6 +19,10 @@ class Reservation
     #[ORM\Column(type: 'date')]
     private $dateReservation;
 
+    #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $Client;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +48,18 @@ class Reservation
     public function setDateReservation(\DateTimeInterface $dateReservation): self
     {
         $this->dateReservation = $dateReservation;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->Client;
+    }
+
+    public function setClient(?Client $Client): self
+    {
+        $this->Client = $Client;
 
         return $this;
     }
