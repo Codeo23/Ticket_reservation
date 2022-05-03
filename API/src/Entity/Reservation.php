@@ -21,7 +21,11 @@ class Reservation
 
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
-    private $Client;
+    private $client;
+
+    #[ORM\ManyToOne(targetEntity: Event::class, inversedBy: 'reservations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $event;
 
     public function getId(): ?int
     {
@@ -54,12 +58,24 @@ class Reservation
 
     public function getClient(): ?Client
     {
-        return $this->Client;
+        return $this->client;
     }
 
-    public function setClient(?Client $Client): self
+    public function setClient(?Client $client): self
     {
-        $this->Client = $Client;
+        $this->client = $client;
+
+        return $this;
+    }
+
+    public function getEvent(): ?Event
+    {
+        return $this->event;
+    }
+
+    public function setEvent(?Event $event): self
+    {
+        $this->event = $event;
 
         return $this;
     }
