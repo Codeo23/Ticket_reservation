@@ -8,7 +8,17 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 #[ORM\Table(name: 'Reservations')]
-#[ApiResource()]
+#[ApiResource(
+    collectionOperations: [
+        'get',
+        'post'
+    ],
+    itemOperations: [
+        'get',
+        'put',
+        'delete'
+    ]
+)]
 class Reservation
 {
     #[ORM\Id]
