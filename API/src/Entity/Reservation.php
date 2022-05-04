@@ -5,10 +5,14 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 #[ORM\Table(name: 'Reservations')]
 #[ApiResource(
+    normalizationContext: [
+        'groups' => ['Res:Read']
+    ],
     collectionOperations: [
         'get',
         'post'
@@ -27,17 +31,21 @@ class Reservation
     private $id;
 
     #[ORM\Column(type: 'string', length: 4)]
+    #[Groups('Res:Read')]
     private $NumPlace;
 
     #[ORM\Column(type: 'date')]
+    #[Groups('Res:Read')]
     private $dateReservation;
 
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false, referencedColumnName: 'codeCli')]
+    #[Groups('Res:Read')]
     private $client;
 
     #[ORM\ManyToOne(targetEntity: Event::class, inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups('Res:Read')]
     private $event;
 
     public function getId(): ?int
