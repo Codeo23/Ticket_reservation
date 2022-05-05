@@ -6,6 +6,9 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ReservationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 #[ORM\Table(name: 'Reservations')]
@@ -35,10 +38,13 @@ class Reservation
 
     #[ORM\Column(type: 'string', length: 4)]
     #[Groups(['Res:Read', 'Res:Write'])]
+    #[NotBlank(message: 'Ce champ ne peut pas être vide !')]
+    #[Length(max: 3, min: 1, minMessage: 'Invalide', maxMessage:'Insupportable')]
     private $numPlace;
 
     #[ORM\Column(type: 'date')]
     #[Groups(['Res:Read'])]
+    #[Date(message: 'Date Invalide')]
     private $dateReservation;
 
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'reservations')]
