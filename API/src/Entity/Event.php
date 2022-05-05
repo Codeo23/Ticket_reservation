@@ -51,6 +51,7 @@ class Event
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['Event:Read'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 15, unique: true)]
