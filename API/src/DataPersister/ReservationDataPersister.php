@@ -4,9 +4,11 @@ namespace App\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use App\Entity\Reservation;
+use App\Repository\ClientRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class ReservationDataPerister implements ContextAwareDataPersisterInterface{
+final class ReservationDataPersister implements ContextAwareDataPersisterInterface {
     
     public function __construct(private EntityManagerInterface $em)
     {
@@ -19,6 +21,12 @@ final class ReservationDataPerister implements ContextAwareDataPersisterInterfac
 
     public function persist($data, array $context = [])
     {
+        if(isset($context['collection_operation_name']) && $context['collection_operation_name'] === 'post'){
+        dd($data);
+        // $user = $this->rep->findOneBy(['email' => 'rajoelisonainatiavina@gmail.com']);
+        $data->setDateReservation(new DateTime());
+        // dd($user);
+        }
         return $data;
     }
 

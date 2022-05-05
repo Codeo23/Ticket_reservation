@@ -15,7 +15,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
     ],
     collectionOperations: [
         'get',
-        'post'
+        'post' => [
+            'groups' => ['Res:Write']
+        ]
     ],
     itemOperations: [
         'get',
@@ -31,16 +33,16 @@ class Reservation
     private $id;
 
     #[ORM\Column(type: 'string', length: 4)]
-    #[Groups('Res:Read')]
+    #[Groups(['Res:Read', 'Res:Write'])]
     private $numPlace;
 
     #[ORM\Column(type: 'date')]
-    #[Groups('Res:Read')]
+    #[Groups(['Res:Read'])]
     private $dateReservation;
 
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false, referencedColumnName: 'code_cli')]
-    #[Groups('Res:Read')]
+    #[Groups(['Res:Read'])]
     private $client;
 
     #[ORM\ManyToOne(targetEntity: Event::class, inversedBy: 'reservations')]
