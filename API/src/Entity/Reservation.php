@@ -30,6 +30,7 @@ class Reservation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['Res:Read'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 4)]
