@@ -32,14 +32,14 @@ class Reservation
 
     #[ORM\Column(type: 'string', length: 4)]
     #[Groups('Res:Read')]
-    private $NumPlace;
+    private $numPlace;
 
     #[ORM\Column(type: 'date')]
     #[Groups('Res:Read')]
     private $dateReservation;
 
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'reservations')]
-    #[ORM\JoinColumn(nullable: false, referencedColumnName: 'codeCli')]
+    #[ORM\JoinColumn(nullable: false, referencedColumnName: 'code_cli')]
     #[Groups('Res:Read')]
     private $client;
 
@@ -55,12 +55,12 @@ class Reservation
 
     public function getNumPlace(): ?string
     {
-        return $this->NumPlace;
+        return $this->numPlace;
     }
 
-    public function setNumPlace(string $NumPlace): self
+    public function setNumPlace(string $numPlace): self
     {
-        $this->NumPlace = $NumPlace;
+        $this->numPlace = $numPlace;
 
         return $this;
     }
