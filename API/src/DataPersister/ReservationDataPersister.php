@@ -23,10 +23,11 @@ final class ReservationDataPersister implements ContextAwareDataPersisterInterfa
 
     public function persist($data, array $context = [])
     {
+        $data->setDateReservation(new DateTime());
+        
         if(isset($context['collection_operation_name']) && $context['collection_operation_name'] === 'post'){
             $user = $this->rep->findOneBy(['email' => 'rajoelisonainatiavina@gmail.com']);
             $event = $this->rep2->findOneBy(["num_Event" => "E_20042002"]);
-            $data->setDateReservation(new DateTime());
             $data->setClient($user);
             $data->setEvent($event);
 
