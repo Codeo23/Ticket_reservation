@@ -30,7 +30,7 @@ final class EventDataPersister implements ContextAwareDataPersisterInterface {
 
         if(isset($context['item_operation_name']) && $context['item_operation_name'] === 'put'){
             // send email to client while modifying an event
-            $this->mail->send('rajoelisonainatiavina@gmail.com');
+            $this->mail->send(email:'rajoelisonainatiavina@gmail.com');
         }
 
         $this->em->flush();
