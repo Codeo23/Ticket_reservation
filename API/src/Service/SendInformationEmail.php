@@ -7,7 +7,7 @@ use Symfony\Component\Mime\Email;
 
 class SendInformationEmail {
 
-    public function __construct(MailerInterface $mailer)
+    public function __construct(private MailerInterface $mailer)
     {
     }
 

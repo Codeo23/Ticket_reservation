@@ -4,12 +4,13 @@ namespace App\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use App\Entity\Event;
+use App\Service\SendInformationEmail;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class EventDataPersister implements ContextAwareDataPersisterInterface {
 
-    public function __construct(private EntityManagerInterface $em)
+    public function __construct(private EntityManagerInterface $em, private SendInformationEmail $mail)
     {
     }
     
@@ -29,6 +30,7 @@ final class EventDataPersister implements ContextAwareDataPersisterInterface {
 
         if(isset($context['item_operation_name']) && $context['item_operation_name'] === 'put'){
             // send email to client while modifying an event
+            $this->mail->send('rajoelisonainatiavina@gmail.com');
         }
 
         $this->em->flush();
