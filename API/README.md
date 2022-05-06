@@ -40,3 +40,8 @@
     Read Items => OWNER/ADMIN (Password cannot be read)
     Modification => OWNER (This fields are able for modification: email, roles, telephone, cardNumber)
     Deletion => OWNER/ADMIN
+
+<h2>Authentication and Token</h2>
+
+    <b>api/login_check</b>: The link for getting the token and the refresh token
+    <b>api/token/refresh</b>: This link is used to refresh the token. It's reinitialize the token's ttl (You need to post the refresh token value to this path).
