@@ -4,14 +4,16 @@ namespace App\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use App\Entity\Event;
+use App\Message\SendInformationEmail;
 use App\Repository\ReservationRepository;
-use App\Service\SendInformationEmail;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 final class EventDataPersister implements ContextAwareDataPersisterInterface {
 
-    public function __construct(private EntityManagerInterface $em,  private ReservationRepository $rep, private SendInformationEmail $mail)
+    public function __construct(private EntityManagerInterface $em, private MessageBusInterface $bus,  
+        private ReservationRepository $rep)
     {
     }
     
@@ -32,9 +34,9 @@ final class EventDataPersister implements ContextAwareDataPersisterInterface {
         if(isset($context['item_operation_name']) && $context['item_operation_name'] === 'put'){
             // send email to client while modifying an event
             $reservations = $this->rep->findBy(['event' => $data]);
-            
+
             foreach($reservations as $reservation){
-                $this->mail->send(email: $reservation->getClient()->getEmail());
+                $this->bus->dispatch(new SendInformationEmail($reservation->getClient()->getEmail()));
             }
         }
 

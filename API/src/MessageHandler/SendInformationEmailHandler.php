@@ -1,20 +1,24 @@
 <?php
 
-namespace App\Service;
+namespace App\MessageHandler;
 
+use App\Message\SendInformationEmail;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Mime\Email;
 
-class SendInformationEmail {
-
+#[AsMessageHandler]
+class SendInformationEmailHandler{
+    
     public function __construct(private MailerInterface $mailer)
     {
     }
 
-    public function send(string $email){
+    public function __invoke(SendInformationEmail $info)
+    {
         $info = (new Email())
             ->from('noreply@gmail.com')
-            ->to($email)
+            ->to($info->getEmail())
             ->subject('Evènement reporté à une date ultérieur')
             ->text("Nous sommes navré de vous apprendre que l'évènement a été reporté.")
         ;
