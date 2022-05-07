@@ -35,8 +35,11 @@ final class EventDataPersister implements ContextAwareDataPersisterInterface {
             // send email to client while modifying an event
             $reservations = $this->rep->findBy(['event' => $data]);
 
-            foreach($reservations as $reservation){
-                $this->bus->dispatch(new SendInformationEmail($reservation->getClient()->getEmail()));
+            if( $data->getDateEvent() != new DateTime((string)$data->getDateEventString()) ){
+                foreach($reservations as $reservation){
+                    $this->bus->dispatch(new SendInformationEmail($reservation->getClient()->getEmail()));
+                }
+                $data->setDateEvent(new DateTime((string)$data->getDateEventString()));
             }
         }
 

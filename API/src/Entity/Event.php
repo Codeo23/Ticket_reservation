@@ -92,7 +92,7 @@ class Event
     #[NotBlank(message: 'Ce champ ne doit pas être vide', groups: ['Event:Write'])]
     private $costToString;
 
-    #[Groups(['Event:Write'])]
+    #[Groups(['Event:Write', 'Event:Edit'])]
     #[Length(exactly: 10, exactMessage: 'Le champ doit contenir 10 caractères')]
     #[Date(message: 'Date invalide')]
     #[NotBlank(message: 'Ce champ ne doit pas être vide', groups: ['Event:Write'])]
