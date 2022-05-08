@@ -56,3 +56,4 @@
 ### Instructions:
 
 <p>Store the token inside the cookie. Its key will be "token"</p>
+<p>Don't forget any steps above.</p>
