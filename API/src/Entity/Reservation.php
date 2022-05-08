@@ -24,7 +24,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
     ],
     itemOperations: [
         'get',
-        'put',
         'delete'
     ]
 )]
