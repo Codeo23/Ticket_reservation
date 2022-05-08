@@ -4,15 +4,17 @@ namespace App\DataPersister;
 
 use ApiPlatform\Core\DataPersister\ContextAwareDataPersisterInterface;
 use App\Entity\Reservation;
+use App\Message\SendTicket;
 use App\Repository\ClientRepository;
 use App\Repository\EventRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 final class ReservationDataPersister implements ContextAwareDataPersisterInterface {
     
     public function __construct(private EntityManagerInterface $em, private ClientRepository $rep, 
-        private EventRepository $rep2)
+        private EventRepository $rep2, private MessageBusInterface $bus)
     {
     }
 
@@ -30,11 +32,13 @@ final class ReservationDataPersister implements ContextAwareDataPersisterInterfa
             $event = $this->rep2->findOneBy(["num_Event" => "E_20042002"]);
             $data->setClient($user);
             $data->setEvent($event);
+            
+            $this->bus->dispatch(new SendTicket($data));
 
             $this->em->persist($data);
         }
         $this->em->flush();
-
+        
         return $data;
     }
 
