@@ -59,5 +59,5 @@
     <li>Store the token inside the cookie. Its key will be "token".</li>
     <li>All paths can be seen on the API docs.</li>
     <li>Ensure that all dependencies are installed correctly.</li>
-    <li>All configurations are required for API's functionality so don't forget any steps above.</li>
+    <li>All configurations are required for the API's functionality so don't forget any steps above.</li>
 <ul>
