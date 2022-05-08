@@ -55,5 +55,8 @@
 
 ### Instructions:
 
-<p>Store the token inside the cookie. Its key will be "token"</p>
-<p>Don't forget any steps above.</p>
+<ul>
+    <li>Store the token inside the cookie. Its key will be "token".</li>
+    <li>All paths can be seen on the API docs.</li>
+    <li>Don't forget any steps above.</li>
+<ul>
