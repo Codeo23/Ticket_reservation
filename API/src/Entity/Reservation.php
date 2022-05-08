@@ -46,6 +46,10 @@ class Reservation
     #[Date(message: 'Date Invalide')]
     private $dateReservation;
 
+    #[Groups(['Res:Write'])]
+    #[NotBlank(message: 'Ce champ ne peut pas être vide')]
+    private $eventReference;
+
     #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'reservations')]
     #[ORM\JoinColumn(nullable: false, referencedColumnName: 'code_cli')]
     #[Groups(['Res:Read'])]
@@ -81,6 +85,18 @@ class Reservation
     public function setDateReservation(\DateTimeInterface $dateReservation): self
     {
         $this->dateReservation = $dateReservation;
+
+        return $this;
+    }
+
+    public function getEventReference()
+    {
+        return $this->eventReference;
+    }
+
+    public function setEventReference(string $eventReference)
+    {
+        $this->eventReference = $eventReference;
 
         return $this;
     }
