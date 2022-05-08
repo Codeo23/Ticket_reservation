@@ -50,13 +50,14 @@
 
 ### Authentication and Token:
 
-    <b>api/login_check</b>: The link for getting the token and the refresh token
-    <b>api/token/refresh</b>: This link is used to refresh the token. It's reinitialize the token's ttl (You need to post the refresh token value to this path).
+    api/login_check: The link for getting the token and the refresh token
+    api/token/refresh: This link is used to refresh the token. It's reinitialize the token's ttl (You need to post the refresh token value to this path).
 
-### Instructions:
+### Important points:
 
 <ul>
     <li>Store the token inside the cookie. Its key will be "token".</li>
     <li>All paths can be seen on the API docs.</li>
-    <li>Don't forget any steps above.</li>
+    <li>Ensure that all dependencies are installed correctly.</li>
+    <li>All configurations are required for API's functionality so don't forget any steps above.</li>
 <ul>
