@@ -9,7 +9,8 @@ use App\Repository\ClientRepository;
 use App\Repository\EventRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class ReservationDataPersister implements ContextAwareDataPersisterInterface {
@@ -32,10 +33,12 @@ final class ReservationDataPersister implements ContextAwareDataPersisterInterfa
             $user = $this->rep->findOneBy(['email' => 'rajoelisonainatiavina@gmail.com']);
             $event = $this->rep2->findOneBy(["num_Event" => $data->getEventReference()]);
 
-            if(!$event){
-                throw new Exception(message: 'There is no such event !!!');
+            if(!$event) {
+                return new JsonResponse(data: [
+                    'message' => 'Ressource introuvable'
+                ], status: Response::HTTP_NOT_FOUND);
             }
-            
+
             $data->setClient($user);
             $data->setEvent($event);
 
