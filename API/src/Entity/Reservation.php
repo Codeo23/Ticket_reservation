@@ -23,8 +23,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
         ]
     ],
     itemOperations: [
-        'get',
-        'delete'
+        'get'
     ]
 )]
 class Reservation

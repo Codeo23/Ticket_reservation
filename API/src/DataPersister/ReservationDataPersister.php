@@ -9,6 +9,7 @@ use App\Repository\ClientRepository;
 use App\Repository\EventRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -16,7 +17,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 final class ReservationDataPersister implements ContextAwareDataPersisterInterface {
     
     public function __construct(private EntityManagerInterface $em, private ClientRepository $rep, 
-        private EventRepository $rep2, private MessageBusInterface $bus)
+        private EventRepository $rep2, private MessageBusInterface $bus, private JWTEncoderInterface $jwtDecode)
     {
     }
 
@@ -30,9 +31,9 @@ final class ReservationDataPersister implements ContextAwareDataPersisterInterfa
         $data->setDateReservation(new DateTime());
         
         if(isset($context['collection_operation_name']) && $context['collection_operation_name'] === 'post'){
-            $user = $this->rep->findOneBy(['email' => 'rajoelisonainatiavina@gmail.com']);
+            // decode the token after that get the value of the username and fetch the corresponded user.
+            $user = $this->rep->findOneBy(['email' => $this->jwtDecode->decode($_COOKIE['token'])['username']]);
             $event = $this->rep2->findOneBy(["num_Event" => $data->getEventReference()]);
-
             if(!$event) {
                 return new JsonResponse(data: [
                     'message' => 'Ressource introuvable'
