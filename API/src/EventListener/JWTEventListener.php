@@ -4,7 +4,7 @@ namespace App\EventListener;
 
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 
-final class JWTListener {
+final class JWTEventListener {
 
     public function onJWTCreated(JWTCreatedEvent $event){
         
@@ -12,5 +12,7 @@ final class JWTListener {
         $payload['clientId'] = $event->getUser()->getCodeCli();     // store the Client's codecli
         $payload['email'] = $payload['username'];      
         unset($payload['username']);        // remove the username field from the payload 
+
+        $event->setData($payload);
     }
 }
