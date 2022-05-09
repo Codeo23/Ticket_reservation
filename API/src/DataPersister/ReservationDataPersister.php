@@ -11,13 +11,16 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 final class ReservationDataPersister implements ContextAwareDataPersisterInterface {
     
     public function __construct(private EntityManagerInterface $em, private ClientRepository $rep, 
-        private EventRepository $rep2, private MessageBusInterface $bus, private JWTEncoderInterface $jwtDecode)
+        private EventRepository $rep2, private MessageBusInterface $bus, private JWTEncoderInterface $jwtDecode,
+        private RequestStack $req)
     {
     }
 
@@ -29,10 +32,11 @@ final class ReservationDataPersister implements ContextAwareDataPersisterInterfa
     public function persist($data, array $context = [])
     {
         $data->setDateReservation(new DateTime());
-        
+        $token = $this->req->getMainRequest()->cookies->get('Token'); // fetch the token from the cookie 
+
         if(isset($context['collection_operation_name']) && $context['collection_operation_name'] === 'post'){
             // decode the token after that get the value of the username and fetch the corresponded user.
-            $user = $this->rep->findOneBy(['email' => $this->jwtDecode->decode($_COOKIE['token'])['username']]);
+            $user = $this->rep->findOneBy(['email' => $this->jwtDecode->decode($token)['email']]);
             $event = $this->rep2->findOneBy(["num_Event" => $data->getEventReference()]);
             if(!$event) {
                 return new JsonResponse(data: [

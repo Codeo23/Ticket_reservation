@@ -5,8 +5,15 @@ namespace App\EventListener;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTExpiredEvent;
+use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Response;
 
 final class JWTEventListener {
+
+    public function __construct(private RequestStack $req)
+    {
+    }
 
     public function onJWTCreated(JWTCreatedEvent $event){
         
@@ -20,11 +27,20 @@ final class JWTEventListener {
 
     public function onAuthenticationSuccess(AuthenticationSuccessEvent $event){
         
-        setcookie(name: 'token', value: $event->getData()['token'], expires_or_options: 7200, path: '/');
+        $cookie = new Cookie(
+            name: 'Token',
+            value: $event->getData()['token'],
+            expire: time()+7200,
+            path: '/api'
+        );
+        
+        $rep = new Response;
+        $rep->headers->setCookie($cookie);
+        $rep->send();
     }
 
     public function onJWTExpired(JWTExpiredEvent $event){
 
-        setcookie(name: 'token', expires_or_options: time() - 3600);
+        $this->req->getMainRequest()->cookies->remove('Token'); // remove the token
     }
 }
