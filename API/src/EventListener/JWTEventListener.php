@@ -4,6 +4,7 @@ namespace App\EventListener;
 
 use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
+use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTExpiredEvent;
 
 final class JWTEventListener {
 
@@ -20,5 +21,10 @@ final class JWTEventListener {
     public function onAuthenticationSuccess(AuthenticationSuccessEvent $event){
         
         setcookie(name: 'token', value: $event->getData()['token'], expires_or_options: 100);
+    }
+
+    public function onJWTExpired(JWTExpiredEvent $event){
+
+        setcookie(name: 'token', expires_or_options: time() - 3600);
     }
 }
