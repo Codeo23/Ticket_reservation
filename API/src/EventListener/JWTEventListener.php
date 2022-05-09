@@ -20,7 +20,7 @@ final class JWTEventListener {
 
     public function onAuthenticationSuccess(AuthenticationSuccessEvent $event){
         
-        setcookie(name: 'token', value: $event->getData()['token'], expires_or_options: 100);
+        setcookie(name: 'token', value: $event->getData()['token'], expires_or_options: 7200);
     }
 
     public function onJWTExpired(JWTExpiredEvent $event){
