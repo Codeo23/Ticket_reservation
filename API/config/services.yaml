@@ -39,7 +39,7 @@ services:
         arguments: [ '@request_stack' ]
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
-    acme_api.event.jwt_authenticated_listener:
+    acme_api.event.authentication_success_listener:
         class: App\EventListener\JWTEventListener
         tags:
-            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_authenticated, method: onJWTAuthenticated }
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccess }

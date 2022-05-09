@@ -2,6 +2,7 @@
 
 namespace App\EventListener;
 
+use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTCreatedEvent;
 
 final class JWTEventListener {
@@ -14,5 +15,10 @@ final class JWTEventListener {
         unset($payload['username']);        // remove the username field from the payload 
 
         $event->setData($payload);
+    }
+
+    public function onAuthenticationSuccess(AuthenticationSuccessEvent $event){
+        
+        setcookie(name: 'token', value: $event->getData()['token'], expires_or_options: 100);
     }
 }
