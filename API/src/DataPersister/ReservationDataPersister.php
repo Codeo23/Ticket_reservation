@@ -35,7 +35,7 @@ final class ReservationDataPersister implements ContextAwareDataPersisterInterfa
 
         if(isset($context['collection_operation_name']) && $context['collection_operation_name'] === 'post'){
             // decode the token after that get the value of the username and fetch the corresponded user.
-            $user = $this->rep->findOneBy(['email' => $this->jwtDecode->decode($token)['email']]);
+            $user = $this->rep->findOneBy(['email' => $this->jwtDecode->decode($token)['username']]);
             $event = $this->rep2->findOneBy(["num_Event" => $data->getEventReference()]);
             if(!$event) {
                 return new JsonResponse(data: [

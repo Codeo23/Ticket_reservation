@@ -7,8 +7,8 @@ use App\Repository\ReservationRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\Date;
-use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Range;
 
 #[ORM\Entity(repositoryClass: ReservationRepository::class)]
 #[ORM\Table(name: 'Reservations')]
@@ -19,7 +19,8 @@ use Symfony\Component\Validator\Constraints\NotBlank;
     collectionOperations: [
         'get',
         'post' => [
-            'groups' => ['Res:Write']
+            'groups' => ['Res:Write'],
+            'security' => "is_granted('ROLE_USER')"
         ]
     ],
     itemOperations: [
@@ -37,7 +38,7 @@ class Reservation
     #[ORM\Column(type: 'string', length: 4)]
     #[Groups(['Res:Read', 'Res:Write'])]
     #[NotBlank(message: 'Ce champ ne peut pas être vide !')]
-    #[Length(max: 3, min: 1, minMessage: 'Invalide', maxMessage:'Insupportable')]
+    #[Range(min: 1, max: 200, notInRangeMessage: "La valeur n'est pas prise en charge.")]
     private $numPlace;
 
     #[ORM\Column(type: 'date')]

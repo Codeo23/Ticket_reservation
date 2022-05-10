@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Controller\LogoutHandler;
 use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -30,13 +31,13 @@ use Symfony\Component\Validator\Constraints\NotBlank;
     ],
     itemOperations: [
         'get' => [
-            'security' => "is_granted('ROLE_ADMIN')"
+            'security' => "is_granted('ROLE_USER')"
         ],
         'put' => [
             'groups' => ['Client:Edit']
         ],
         'delete' => [
-            'security' => "is_granted('ROLE_ADMIN')"
+            'security' => "is_granted('ROLE_USER')"
         ]
     ]
 )]
@@ -72,7 +73,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     private $roles = [];
 
     #[ORM\Column(type: 'string', length: 150)]
-    #[Groups(['Client:Read', 'Client:Write'])]
+    #[Groups(['Client:Write'])]
     #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
     #[Length(min: 5, max: 60, minMessage: 'Caractère minimum approuvé {{ limit }}', 
             maxMessage: 'Caractère maximum approuvé {{ limit }}')]
