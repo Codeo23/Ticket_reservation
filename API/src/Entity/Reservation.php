@@ -19,7 +19,8 @@ use Symfony\Component\Validator\Constraints\Range;
     collectionOperations: [
         'get',
         'post' => [
-            'groups' => ['Res:Write']
+            'groups' => ['Res:Write'],
+            'security' => "is_granted('ROLE_USER')"
         ]
     ],
     itemOperations: [
