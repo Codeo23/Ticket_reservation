@@ -72,7 +72,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     private $roles = [];
 
     #[ORM\Column(type: 'string', length: 150)]
-    #[Groups(['Client:Read', 'Client:Write'])]
+    #[Groups(['Client:Write'])]
     #[NotBlank(message: 'Ce champ ne peut pas être vide!')]
     #[Length(min: 5, max: 60, minMessage: 'Caractère minimum approuvé {{ limit }}', 
             maxMessage: 'Caractère maximum approuvé {{ limit }}')]
