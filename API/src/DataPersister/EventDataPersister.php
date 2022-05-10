@@ -40,6 +40,7 @@ final class EventDataPersister implements ContextAwareDataPersisterInterface {
                     $this->bus->dispatch(new SendInformationEmail($reservation->getClient()->getEmail()));
                 }
                 $data->setDateEvent(new DateTime((string)$data->getDateEventString()));
+                $data->setNumEvent('E_'.date_format($data->getDateEvent(), 'dmY'));
             }
         }
 
