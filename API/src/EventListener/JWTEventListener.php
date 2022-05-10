@@ -19,9 +19,7 @@ final class JWTEventListener {
         
         $payload = $event->getData();  
         $payload['clientId'] = $event->getUser()->getCodeCli();     // store the Client's codecli
-        $payload['email'] = $payload['username'];      
-        unset($payload['username']);        // remove the username field from the payload 
-
+        
         $event->setData($payload);
     }
 
