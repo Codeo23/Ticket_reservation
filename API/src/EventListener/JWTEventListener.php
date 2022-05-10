@@ -29,7 +29,7 @@ final class JWTEventListener {
             name: 'Token',
             value: $event->getData()['token'],
             expire: time()+7200,
-            path: '/api'
+            path: '/'
         );
         
         $rep = new Response;
