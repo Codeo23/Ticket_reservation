@@ -175,6 +175,9 @@
     "stella-maris/clock": {
         "version": "0.1.4"
     },
+    "stripe/stripe-php": {
+        "version": "v8.0.0"
+    },
     "symfony/amqp-messenger": {
         "version": "v5.4.5"
     },
