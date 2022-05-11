@@ -7,12 +7,19 @@ use App\Entity\Reservation;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[AsController]
 class PaymentHandler extends AbstractController{
+
+    public function __construct(private MailerInterface $mailer)
+    {
+    }
 
     #[Route(
         name: 'reservation_payment',
@@ -31,11 +38,11 @@ class PaymentHandler extends AbstractController{
             'customer_email' => $data->getClient()->getEmail(),
             'line_items' => [[
                 'price_data' => [
-                  'currency' => 'usd',
+                  'currency' => 'eur',
                   'product_data' => [
-                    'name' => 'T-shirt',
+                    'name' => $data->getEvent()->getTitle(),
                   ],
-                  'unit_amount' => 2000,
+                  'unit_amount' => $data->getEvent()->getCost(),
                 ],
                 'quantity' => 1,
               ]],
@@ -44,7 +51,17 @@ class PaymentHandler extends AbstractController{
               'cancel_url' => $this->generateUrl(route: 'cancel_url', referenceType: UrlGeneratorInterface::ABS_URL)
         ]);
         
-        return $this->redirect($session->url, status: 303);
+        $info = (new Email())
+            ->from('noreply@gmail.com')
+            ->to($data->getClient()->getEmail())
+            ->subject('Link for the payment')
+            ->html('<a href='.$session->url.'>Click here</a>')
+        ;
+        $this->mailer->send($info);
+        
+        return new JsonResponse([
+            'message' => 'check your email inbox'
+        ], status: 200);
     }
 
     #[Route(path: '/success', name: 'success_url')]
