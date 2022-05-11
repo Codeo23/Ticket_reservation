@@ -24,7 +24,11 @@ use Symfony\Component\Validator\Constraints\Range;
         ]
     ],
     itemOperations: [
-        'get'
+        'get',
+        'payment' => [
+            'method' => 'POST',
+            'path' => '/reservation/{id}/payment',
+        ]
     ]
 )]
 class Reservation
