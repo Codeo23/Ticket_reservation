@@ -27,6 +27,7 @@ class PaymentHandler extends AbstractController{
         Stripe::setApiKey('sk_test_51KxrbVHlCnziPo87nWN2cWdMCwyIFpqabSkhvVPetBkjArYhCjTpsRQvdPIrrcrloroVa6WeueKuUkTtXpsgiBOx00HvJojNmG');
 
         $session = Session::create([
+            'customer_email' => $data->getClient()->getEmail(),
             'line_items' => [[
                 'price_data' => [
                   'currency' => 'usd',
@@ -41,7 +42,7 @@ class PaymentHandler extends AbstractController{
               'success_url' => 'http://localhost:4242/success.html',
               'cancel_url' => 'http://localhost:4242/cancel.html',
         ]);
-
+        dd($session);
         return $this->redirect($session->url, status: 303);
     }
 }
