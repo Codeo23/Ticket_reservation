@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Reservation;
+use Stripe\Checkout\Session;
 use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +24,24 @@ class PaymentHandler extends AbstractController{
     )]
     public function __invoke(Reservation $data): Response
     {
-        Stripe::setApiKey('pk_test_51KxrbVHlCnziPo87VGCFS1ycG3T7XHEnedEsUAE5EAL1B5IF2iO7xAHnfu8jRs4myywUcDfGzmlRPzkmqc8nq3NZ00sC8oVKAf');
-        
+        Stripe::setApiKey('sk_test_51KxrbVHlCnziPo87nWN2cWdMCwyIFpqabSkhvVPetBkjArYhCjTpsRQvdPIrrcrloroVa6WeueKuUkTtXpsgiBOx00HvJojNmG');
+
+        $session = Session::create([
+            'line_items' => [[
+                'price_data' => [
+                  'currency' => 'usd',
+                  'product_data' => [
+                    'name' => 'T-shirt',
+                  ],
+                  'unit_amount' => 2000,
+                ],
+                'quantity' => 1,
+              ]],
+              'mode' => 'payment',
+              'success_url' => 'http://localhost:4242/success.html',
+              'cancel_url' => 'http://localhost:4242/cancel.html',
+        ]);
+
+        return $this->redirect($session->url, status: 303);
     }
 }
