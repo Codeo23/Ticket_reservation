@@ -2,10 +2,8 @@
 
 namespace App\Controller;
 
-use ApiPlatform\Core\Api\UrlGeneratorInterface;
 use App\Entity\Reservation;
-use Stripe\Checkout\Session;
-use Stripe\Stripe;
+use App\Service\PaymentService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[AsController]
 class PaymentHandler extends AbstractController{
 
-    public function __construct(private MailerInterface $mailer)
+    public function __construct(private MailerInterface $mailer, private PaymentService $paymentService)
     {
     }
 
@@ -32,24 +30,7 @@ class PaymentHandler extends AbstractController{
     )]
     public function __invoke(Reservation $data): Response
     {
-        Stripe::setApiKey('sk_test_51KxrbVHlCnziPo87nWN2cWdMCwyIFpqabSkhvVPetBkjArYhCjTpsRQvdPIrrcrloroVa6WeueKuUkTtXpsgiBOx00HvJojNmG');
-
-        $session = Session::create([
-            'customer_email' => $data->getClient()->getEmail(),
-            'line_items' => [[
-                'price_data' => [
-                  'currency' => 'eur',
-                  'product_data' => [
-                    'name' => $data->getEvent()->getTitle(),
-                  ],
-                  'unit_amount' => $data->getEvent()->getCost(),
-                ],
-                'quantity' => 1,
-              ]],
-              'mode' => 'payment',
-              'success_url' => $this->generateUrl(route: 'success_url', referenceType: UrlGeneratorInterface::ABS_URL),
-              'cancel_url' => $this->generateUrl(route: 'cancel_url', referenceType: UrlGeneratorInterface::ABS_URL)
-        ]);
+        $session = $this->paymentService->payment($data);
         
         $info = (new Email())
             ->from('noreply@gmail.com')
