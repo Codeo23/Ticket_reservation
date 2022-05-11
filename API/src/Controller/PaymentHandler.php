@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use ApiPlatform\Core\Api\UrlGeneratorInterface;
 use App\Entity\Reservation;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
@@ -39,10 +40,22 @@ class PaymentHandler extends AbstractController{
                 'quantity' => 1,
               ]],
               'mode' => 'payment',
-              'success_url' => 'http://localhost:4242/success.html',
-              'cancel_url' => 'http://localhost:4242/cancel.html',
+              'success_url' => $this->generateUrl(route: 'success_url', referenceType: UrlGeneratorInterface::ABS_URL),
+              'cancel_url' => $this->generateUrl(route: 'cancel_url', referenceType: UrlGeneratorInterface::ABS_URL)
         ]);
-        dd($session);
+        
         return $this->redirect($session->url, status: 303);
+    }
+
+    #[Route(path: '/success', name: 'success_url')]
+    public function successHandler(){
+
+        return $this->render('Payment/success.html.twig');
+    }
+
+    #[Route(path: '/cancel', name: 'cancel_url')]
+    public function cancelHandler(){
+
+        return $this->render('Payment/cancel.html.twig');
     }
 }
