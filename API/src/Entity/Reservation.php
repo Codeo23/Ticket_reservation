@@ -28,6 +28,7 @@ use Symfony\Component\Validator\Constraints\Range;
         'payment' => [
             'route_name' => 'reservation_payment',
             'method' => 'POST',
+            'security' => "is_granted('ROLE_USER')",
             'openapi_context' => [
                 'summary' => 'Handle the payment operation'
             ]
