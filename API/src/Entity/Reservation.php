@@ -25,7 +25,13 @@ use Symfony\Component\Validator\Constraints\Range;
     ],
     itemOperations: [
         'get',
-        'payment' => ['route_name' => 'reservation_payment'],
+        'payment' => [
+            'route_name' => 'reservation_payment',
+            'method' => 'POST',
+            'openapi_context' => [
+                'summary' => 'Handle the payment operation'
+            ]
+        ],
     ]
 )]
 class Reservation
