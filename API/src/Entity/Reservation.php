@@ -68,6 +68,10 @@ class Reservation
     #[Groups('Res:Read')]
     private $event;
 
+    #[ORM\Column(type: 'boolean')]
+    #[Groups('Res:Read')]
+    private $payed = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -129,6 +133,18 @@ class Reservation
     public function setEvent(?Event $event): self
     {
         $this->event = $event;
+
+        return $this;
+    }
+
+    public function getPayed(): ?bool
+    {
+        return $this->payed;
+    }
+
+    public function setPayed(bool $payed): self
+    {
+        $this->payed = $payed;
 
         return $this;
     }
