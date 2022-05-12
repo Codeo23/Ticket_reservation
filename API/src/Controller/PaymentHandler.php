@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Reservation;
 use App\Service\PaymentService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,12 +34,16 @@ class PaymentHandler extends AbstractController{
         return new JsonResponse([
             'message' => "This is the payment's link",
             'link' => $url
-        ], status: 200);
+        ], status: Response::HTTP_OK);
     }
 
-    #[Route(path: '/success', name: 'success_url')]
-    public function successHandler(){
+    #[Route(path: '/success/{id}', name: 'success_url')]
+    public function successHandler(Reservation $data, EntityManagerInterface $em){
 
+        $data->setPayed(true);
+
+        $em->flush();
+        
         return $this->render('Payment/success.html.twig');
     }
 
