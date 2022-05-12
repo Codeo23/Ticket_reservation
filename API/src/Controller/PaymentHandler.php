@@ -8,14 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\AsController;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[AsController]
 class PaymentHandler extends AbstractController{
 
-    public function __construct(private MailerInterface $mailer, private PaymentService $paymentService)
+    public function __construct(private PaymentService $paymentService)
     {
     }
 
@@ -32,16 +30,9 @@ class PaymentHandler extends AbstractController{
     {
         $url = $this->paymentService->paymentUrl($data);
         
-        $info = (new Email())
-            ->from('noreply@gmail.com')
-            ->to($data->getClient()->getEmail())
-            ->subject('Link for the payment')
-            ->html('<a href='.$url.'>Click here</a>')
-        ;
-        $this->mailer->send($info);
-        
         return new JsonResponse([
-            'message' => 'check your email inbox'
+            'message' => "This is the payment's link",
+            'link' => $url
         ], status: 200);
     }
 
