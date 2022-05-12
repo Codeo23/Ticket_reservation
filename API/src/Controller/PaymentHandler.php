@@ -30,13 +30,13 @@ class PaymentHandler extends AbstractController{
     )]
     public function __invoke(Reservation $data): Response
     {
-        $session = $this->paymentService->payment($data);
+        $url = $this->paymentService->paymentUrl($data);
         
         $info = (new Email())
             ->from('noreply@gmail.com')
             ->to($data->getClient()->getEmail())
             ->subject('Link for the payment')
-            ->html('<a href='.$session->url.'>Click here</a>')
+            ->html('<a href='.$url.'>Click here</a>')
         ;
         $this->mailer->send($info);
         

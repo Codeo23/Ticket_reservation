@@ -14,7 +14,11 @@ class PaymentService {
     {
     }
 
-    public function payment(Reservation $reservation){
+    /**
+    * @return the_session_url
+    * 
+    */
+    public function paymentUrl(Reservation $reservation): string{
         
         Stripe::setApiKey('sk_test_51KxrbVHlCnziPo87nWN2cWdMCwyIFpqabSkhvVPetBkjArYhCjTpsRQvdPIrrcrloroVa6WeueKuUkTtXpsgiBOx00HvJojNmG');
 
@@ -35,6 +39,6 @@ class PaymentService {
               'cancel_url' => $this->router->generate(name: 'cancel_url', referenceType: UrlGeneratorInterface::ABS_URL)
         ]);
 
-        return $session;
+        return $session->url;
     }
 }
