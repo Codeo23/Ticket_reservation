@@ -16,12 +16,10 @@ class SendTicketHandler{
 
     public function __invoke(SendTicket $ticket)
     {
-        $reservation = $ticket->getReservation();
-
         $mail = (new Email())
             ->from('noreply@gmail.com')
-            ->to($reservation->getClient()->getEmail())
-            ->subject("Ticket pour l'évènement du ".$reservation->getEvent()->getDateEvent()->format('d-m-Y'))
+            ->to($ticket->getEmail())
+            ->subject("Ticket pour l'évènement du ".$ticket->getDate()->format('d-m-Y'))
             ->text('Voici votre ticket')
         ;
 
