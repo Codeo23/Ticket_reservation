@@ -41,7 +41,7 @@ class PaymentHandler extends AbstractController{
         ], status: Response::HTTP_OK);
     }
 
-    #[Route(path: '/success/{id}', name: 'success_url', methods: ['GET'])]
+    #[Route(path: '/payment/{id}', name: 'success_url', methods: ['GET'])]
     public function successPayment(RequestStack $req, ReservationRepository $rep, 
     EntityManagerInterface $em, MessageBusInterface $bus){
 
