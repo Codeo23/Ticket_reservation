@@ -35,8 +35,8 @@ class PaymentService {
                 'quantity' => 1,
               ]],
               'mode' => 'payment',
-              'success_url' => $this->router->generate(name: 'success_url', referenceType: UrlGeneratorInterface::ABS_URL),
-              'cancel_url' => $this->router->generate(name: 'cancel_url', referenceType: UrlGeneratorInterface::ABS_URL)
+              'success_url' => $this->router->generate(name: 'success_url', parameters: [ 'id' => $reservation->getId() ], referenceType: UrlGeneratorInterface::ABS_URL),
+              'cancel_url' => $this->router->generate(name: 'cancel_url',parameters: [ 'id' => $reservation->getId() ], referenceType: UrlGeneratorInterface::ABS_URL)
         ]);
 
         return $session->url;
