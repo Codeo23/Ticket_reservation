@@ -17,6 +17,7 @@
     php bin/console doctrine:database:create
     php bin/console make:migration
     php bin/console doctrine:migrations:migrate
+    php bin/console create:super-admin      // You should create your own super admin 
     php bin/console messenger:consume -vv      // launch the messenger service
 
 <h3>Then run your local server with : </h3>
