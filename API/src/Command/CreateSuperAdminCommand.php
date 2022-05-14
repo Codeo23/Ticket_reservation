@@ -36,6 +36,9 @@ class CreateSuperAdminCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $helper = $this->getHelper('question');
 
+        $io->title('Create your own super user');
+        $io->section('User Information.');
+        
         $firstName = $helper->ask($input, $output, new Question('First Name: '));
         $lastName = $helper->ask($input, $output, new Question('Family Name: '));
         $email = $helper->ask($input, $output, new Question('Email Address: '));
@@ -61,6 +64,9 @@ class CreateSuperAdminCommand extends Command
             ->setTelephone($phoneNumber)
             ->setCardNumber($cardNumber)
         ;
+
+        $io->section('Generating the User. Wait a minute ...');
+        sleep(2000);
 
         $this->em->persist($client);
         $this->em->flush();
