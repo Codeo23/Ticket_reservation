@@ -64,7 +64,7 @@
 
 <ul>
     <li>The token is stored in the cookie. You can access it through the "Token" keyword</li>
-    <li>All paths can be seen on the API docs.</li>
+    <li>All entry points can be seen on the API docs.</li>
     <li>Ensure that all dependencies are installed correctly.</li>
     <li>All configurations are required for the API's functionality so don't forget any steps above.</li>
 <ul>
